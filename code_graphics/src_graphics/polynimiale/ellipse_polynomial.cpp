@@ -1,6 +1,5 @@
 #include ".\..\..\includs\graphics_utils.h"
-#include <graphics.h>
-#include <iostream>
+
 
 #include <cmath>
 

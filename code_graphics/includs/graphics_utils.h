@@ -1,4 +1,5 @@
 #include "graphics.h"
+#include <cmath>
 
 #define PI 3.14159265358979323846
 class Point{
@@ -16,11 +17,11 @@ void init_graph_() {
 }
 
 void repere(int xc, int yc) {
-    cleardevice();
-    setbkcolor(5);
-    line(xc - 320, yc + 0, xc + 320, yc + 0);
-    line(xc + 0, yc - 240, xc + 0, yc + 240);
-    setcolor(5);
+    int xm = getmaxx()/2;
+    int ym = getmaxy()/2;
+    line(xc - xm, yc + 0, xc + xm, yc + 0);
+    line(xc + 0, yc - ym, xc + 0, yc + ym);
+
 }
 
 void pixel5(int x, int y, int color) {
@@ -85,7 +86,6 @@ void pixel13(int x, int y, int color) {
     putpixel(x - 2, y + 2, color);
 }
 void pixel(int x, int y, int color, int lw = 1) {
-
 
     switch (lw) {
         case 5:
