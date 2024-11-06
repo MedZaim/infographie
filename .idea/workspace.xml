@@ -6,6 +6,9 @@
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
 }</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
@@ -18,7 +21,30 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="drawing line using mouse coordinates" />
+    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="drawing line using mouse coordinates">
+      <change afterPath="$PROJECT_DIR$/chapes.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/chapes.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mains.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mains.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/bresenham_cercle.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/bresenham_line.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/cercle_teurnante.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/ellipse_bresenham.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/fleure/fleure.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/fleure/fleure.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/horloge/horloge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/horloge/horloge.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/drow_mouse.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/drow_mouse.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/cercle_polynomial.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/ellipse_polynomial.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/ligne_tourning.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ligne_tourning.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/plynomial_ligne.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/cercle_trigonometrique.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/elipse_teta.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/ellipse_trigonometrique.cpp" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +56,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "MedZaim"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/MedZaim/infographie.git",
+    "accountId": "af5b7c1c-28a2-451f-bee2-988c17854d44"
+  }
+}]]></component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
@@ -49,10 +87,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "C/C++ File.chapes.cpp.executor": "Run",
+    "C/C++ File.mains.cpp.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
@@ -75,10 +115,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics" />
       <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\trigonometrique" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.drow_mouse.cpp">
+  <component name="RunManager" selected="C/C++ File.mains.cpp">
+    <configuration name="chapes.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="chapes.cpp" CONFIG_NAME="chapes.cpp">
+      <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
+      <option name="sourceFile" value="code_graphics\src_graphics\chapes.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="drow_mouse.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="drow_mouse.cpp" CONFIG_NAME="drow_mouse.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
       <option name="sourceFile" value="code_graphics\src_graphics\mouse_click\drow_mouse.cpp" />
@@ -93,16 +141,9 @@
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="fleure.cpp (1)" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="bresenham_cercle.cpp" CONFIG_NAME="fleure.cpp (1)">
+    <configuration name="mains.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="mains.cpp" CONFIG_NAME="mains.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\bresenhame\bresenham_cercle.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="fleure.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="fleure.cpp" CONFIG_NAME="fleure.cpp">
-      <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\fleure\fleure.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\mains.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
@@ -115,19 +156,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="C/C++ File.mains.cpp" />
+      <item itemvalue="C/C++ File.chapes.cpp" />
       <item itemvalue="C/C++ File.drow_mouse.cpp" />
       <item itemvalue="C/C++ File.mouse_click.cpp" />
-      <item itemvalue="C/C++ File.fleure.cpp (1)" />
-      <item itemvalue="C/C++ File.fleure.cpp" />
       <item itemvalue="C/C++ File.elipse_teta.cpp " />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.mains.cpp" />
+        <item itemvalue="C/C++ File.chapes.cpp" />
         <item itemvalue="C/C++ File.drow_mouse.cpp" />
         <item itemvalue="C/C++ File.mouse_click.cpp" />
         <item itemvalue="C/C++ File.elipse_teta.cpp " />
-        <item itemvalue="C/C++ File.fleure.cpp (1)" />
-        <item itemvalue="C/C++ File.fleure.cpp" />
       </list>
     </recent_temporary>
   </component>
@@ -151,6 +192,7 @@
       <workItem from="1730764026477" duration="37000" />
       <workItem from="1730794024041" duration="12595000" />
       <workItem from="1730851235139" duration="5777000" />
+      <workItem from="1730890633514" duration="23673000" />
     </task>
     <task id="LOCAL-00001" summary="aegdhfh">
       <option name="closed" value="true" />
@@ -176,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730889496860</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="drawing line using mouse coordinates">
+      <option name="closed" value="true" />
+      <created>1730890667109</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730890667109</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,17 +254,6 @@
     <MESSAGE value="aegdhfh" />
     <MESSAGE value="drawing line using mouse coordinates" />
     <option name="LAST_COMMIT_MESSAGE" value="drawing line using mouse coordinates" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/elipse_teta.cpp</url>
-          <line>45</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

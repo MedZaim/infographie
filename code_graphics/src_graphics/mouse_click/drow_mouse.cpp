@@ -1,7 +1,7 @@
 //
 // Created by lenovo on 06/11/2024.
 //
-#include "./../bresenhame/bresenham_line.cpp"
+#include "./../bresenhame/line_bresenham.cpp"
 //#include "../../includs/graphics_utils.h"
 
 #include <iostream>

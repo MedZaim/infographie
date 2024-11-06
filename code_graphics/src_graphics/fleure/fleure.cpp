@@ -4,8 +4,8 @@
 //
 // Created by lenovo on 02/11/2024.
 #include "./../trigonometrique/elipse_teta.cpp"
-#include "./../bresenhame/bresenham_cercle.cpp"
-#include "./../bresenhame/bresenham_line.cpp"
+#include "./../bresenhame/cercle_bresenham.cpp"
+#include "./../bresenhame/line_bresenham.cpp"
 #include <cmath>
 #include <iostream>
 #include <ctime>

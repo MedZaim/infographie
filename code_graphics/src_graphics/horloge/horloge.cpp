@@ -1,10 +1,10 @@
 //
 // Created by lenovo on 02/11/2024.
 
-#include "./../../includs/graphics_utils.h"
-#include "./../bresenhame/bresenham_cercle.cpp"
-#include "./../bresenhame/bresenham_line.cpp"
-#include <cmath>
+//#include "./../../includs/graphics_utils.h"
+#include "./../bresenhame/cercle_bresenham.cpp"
+#include "./../bresenhame/line_bresenham.cpp"
+//#include <cmath>
 #include <iostream>
 #include <ctime>
 
@@ -47,13 +47,13 @@ void clock_(int xc = 0, int yc = 0, int r = 200, int color = 15, int color_h_h =
             x1 = (r - 20) * sin((i / 60.0) * 2 * PI);
             y1 = (r - 20) * cos((i / 60.0) * 2 * PI);
             if (i % 15 == 0)
-                bresenham_line(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 13);
+                line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 13);
             else
-                bresenham_line(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 9);
+                line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 9);
         } else {
             x1 = (r - 10) * sin((i / 60.0) * 2 * PI);
             y1 = (r - 10) * cos((i / 60.0) * 2 * PI);
-            bresenham_line(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 1);
+            line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 1);
         }
 
 
@@ -78,14 +78,14 @@ void clock_(int xc = 0, int yc = 0, int r = 200, int color = 15, int color_h_h =
         ys = rs * cos((s / 60.0) * 2 * PI);
 
 
-        bresenham_line(xc, yc, xh_ + xc, yh_ + yc, bk_color, 13);
-        bresenham_line(xc, yc, xh + xc, yh + yc, color_h_h, 13);
+        line_bresenham(xc, yc, xh_ + xc, yh_ + yc, bk_color, 13);
+        line_bresenham(xc, yc, xh + xc, yh + yc, color_h_h, 13);
 
-        bresenham_line(xc, yc, xm_ + xc, ym_ + yc, bk_color, 9);
-        bresenham_line(xc, yc, xm + xc, ym + yc, color_h_m, 9);
+        line_bresenham(xc, yc, xm_ + xc, ym_ + yc, bk_color, 9);
+        line_bresenham(xc, yc, xm + xc, ym + yc, color_h_m, 9);
 
-        bresenham_line(xc, yc, xs_ + xc, ys_ + yc, bk_color, 5);
-        bresenham_line(xc, yc, xs + xc, ys + yc, color_h_s, 5);
+        line_bresenham(xc, yc, xs_ + xc, ys_ + yc, bk_color, 5);
+        line_bresenham(xc, yc, xs + xc, ys + yc, color_h_s, 5);
 
         xh_ = xh;
         yh_ = yh;
