@@ -2,8 +2,7 @@
 // Created by lenovo on 02/11/2024.
 
 //#include "./../../includs/graphics_utils.h"
-#include "./../bresenhame/cercle_bresenham.cpp"
-#include "./../bresenhame/line_bresenham.cpp"
+#include "../../includs/chapes.h"
 //#include <cmath>
 #include <iostream>
 #include <ctime>

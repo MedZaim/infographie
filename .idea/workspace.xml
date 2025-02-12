@@ -3,6 +3,11 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
 }</component>
@@ -21,29 +26,56 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="drawing line using mouse coordinates">
-      <change afterPath="$PROJECT_DIR$/chapes.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/chapes.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mains.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mains.exe" afterDir="false" />
+    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="implementation of customized chaps functions">
+      <change afterPath="$PROJECT_DIR$/code_graphics/cube.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/includs/math_trix.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/align_with_Z.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/alin/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/control/control.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/control/courbe.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/correc_exam/corr_ex1_courb.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/correc_exam/corr_ex2_flr.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/correc_exam/corr_ex3_.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/courbs/biezier.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/aligner.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/aligner_avec_z.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/aliiign.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/heeelooooooo.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/ideas.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/object.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/perspective_diagonale_test3.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/polyedere.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/projection_cub_pers_on_diagonal_plan.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/test3.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ideas/test4.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/pendule/pendule.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/perspective/perspective.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/perspective/perspective_américain.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/points_de_fuite/les_3_pts_de_fuite.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/polygone/Polygon.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/polygone/polycone_main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code_graphics/src_graphics/projection_sur_diagonale.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/perspective_diagonale_test3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polycone_main.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polyedere.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bresenham_cercle.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chapes.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/bresenham_cercle.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/bresenham_line.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/cercle_teurnante.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/bresenhame/ellipse_bresenham.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/chapes.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/fleure/fleure.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/fleure/fleure.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/horloge/horloge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/horloge/horloge.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/ligne_tourning.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mains.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/drow_mouse.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/drow_mouse.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/cercle_polynomial.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/ellipse_polynomial.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/ligne_tourning.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/ligne_tourning.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/polynimiale/plynomial_ligne.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/cercle_trigonometrique.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/elipse_teta.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/trigonometrique/ellipse_trigonometrique.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drow_mouse.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elipse_teta.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fleure.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/horloge.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mains.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mouse_click.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,18 +88,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MedZaim"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MedZaim&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MedZaim/infographie.git",
-    "accountId": "af5b7c1c-28a2-451f-bee2-988c17854d44"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MedZaim/infographie.git&quot;,
+    &quot;accountId&quot;: &quot;af5b7c1c-28a2-451f-bee2-988c17854d44&quot;
   }
-}]]></component>
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/code_graphics/src_graphics/align_with_Z.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/code_graphics/src_graphics/ideas/heeelooooooo.cpp" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
@@ -87,23 +123,62 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "C/C++ File.align_with_Z.cpp.executor": "Run",
+    "C/C++ File.aligner.cpp.executor": "Run",
+    "C/C++ File.aligner_avec_z.cpp.executor": "Run",
+    "C/C++ File.aliiign.cpp.executor": "Run",
+    "C/C++ File.biezier.cpp.executor": "Run",
     "C/C++ File.chapes.cpp.executor": "Run",
+    "C/C++ File.control.cpp.executor": "Run",
+    "C/C++ File.corr_ex3_.cpp.executor": "Run",
+    "C/C++ File.corr_ex_courb.cpp.executor": "Run",
+    "C/C++ File.courbe.cpp.executor": "Run",
+    "C/C++ File.cub.cpp (1).executor": "Run",
+    "C/C++ File.cub.cpp.executor": "Run",
+    "C/C++ File.cube.cpp.executor": "Run",
+    "C/C++ File.drow_mouse.cpp.executor": "Run",
+    "C/C++ File.fleure.cpp.executor": "Run",
+    "C/C++ File.flr.cpp.executor": "Run",
+    "C/C++ File.heeelooooooo.cpp.executor": "Debug",
+    "C/C++ File.ideas.cpp.executor": "Run",
+    "C/C++ File.les_3_pts_de_fuite.cpp (1).executor": "Run",
+    "C/C++ File.les_3_pts_de_fuite.cpp.executor": "Run",
+    "C/C++ File.main.cpp.executor": "Run",
+    "C/C++ File.mains.cpp (1).executor": "Run",
     "C/C++ File.mains.cpp.executor": "Run",
+    "C/C++ File.math_trix.cpp.executor": "Run",
+    "C/C++ File.mouse_click.cpp.executor": "Run",
+    "C/C++ File.pendule.cpp.executor": "Run",
+    "C/C++ File.perspective.cpp.executor": "Run",
+    "C/C++ File.perspective_américain.cpp.executor": "Run",
+    "C/C++ File.perspective_diagonale_test3.cpp.executor": "Run",
+    "C/C++ File.polycone_main.cpp.executor": "Run",
+    "C/C++ File.polyedere.cpp.executor": "Run",
+    "C/C++ File.projection_cub_pers_on_diagonal_plan.cpp.executor": "Run",
+    "C/C++ File.projection_sur_diagonale.cpp.executor": "Run",
+    "C/C++ File.pt_de_fuite_3.cpp.executor": "Run",
+    "C/C++ File.test3.cpp.executor": "Run",
+    "C/C++ File.test4.cpp.executor": "Run",
+    "C/C++ File.testing2.cpp.executor": "Run",
+    "C/C++ File.tsting.cpp.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/lenovo/Desktop/stady_work/infographie/code_graphics/src_graphics/trigonometrique/elipse_teta.cpp",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Med/Desktop/desktop_importent/stady_work/infographie",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "consents",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -114,61 +189,56 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\alin" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics" />
-      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\trigonometrique" />
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\includs" />
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\perspective" />
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\points_de_fuite" />
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\courbs" />
+      <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.mains.cpp">
-    <configuration name="chapes.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="chapes.cpp" CONFIG_NAME="chapes.cpp">
-      <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\chapes.cpp" />
+  <component name="RunManager" selected="C/C++ File.corr_ex3_.cpp">
+    <configuration name="Unnamed" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" nameIsGenerated="true" PROGRAM_PARAMS="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <option name="toolchainName" value="MinGW" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="drow_mouse.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="drow_mouse.cpp" CONFIG_NAME="drow_mouse.cpp">
+    <configuration name="align_with_Z.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="align_with_Z.cpp" CONFIG_NAME="align_with_Z.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\mouse_click\drow_mouse.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\align_with_Z.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="elipse_teta.cpp " type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="elipse_teta.cpp" CONFIG_NAME="elipse_teta.cpp ">
+    <configuration name="corr_ex3_.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="corr_ex3_.cpp" CONFIG_NAME="corr_ex3_.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\trigonometrique\elipse_teta.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\correc_exam\corr_ex3_.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mains.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="mains.cpp" CONFIG_NAME="mains.cpp">
+    <configuration name="projection_cub_pers_on_diagonal_plan.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="projection_cub_pers_on_diagonal_plan.cpp" CONFIG_NAME="projection_cub_pers_on_diagonal_plan.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\mains.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="mouse_click.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="mouse_click.cpp" CONFIG_NAME="mouse_click.cpp">
-      <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\mouse_click\mouse_click.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\ideas\projection_cub_pers_on_diagonal_plan.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="C/C++ File.mains.cpp" />
-      <item itemvalue="C/C++ File.chapes.cpp" />
-      <item itemvalue="C/C++ File.drow_mouse.cpp" />
-      <item itemvalue="C/C++ File.mouse_click.cpp" />
-      <item itemvalue="C/C++ File.elipse_teta.cpp " />
+      <item itemvalue="C/C++ File.Unnamed" />
+      <item itemvalue="C/C++ File.corr_ex3_.cpp" />
+      <item itemvalue="C/C++ File.align_with_Z.cpp" />
+      <item itemvalue="C/C++ File.projection_cub_pers_on_diagonal_plan.cpp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="C/C++ File.mains.cpp" />
-        <item itemvalue="C/C++ File.chapes.cpp" />
-        <item itemvalue="C/C++ File.drow_mouse.cpp" />
-        <item itemvalue="C/C++ File.mouse_click.cpp" />
-        <item itemvalue="C/C++ File.elipse_teta.cpp " />
+        <item itemvalue="C/C++ File.corr_ex3_.cpp" />
+        <item itemvalue="C/C++ File.projection_cub_pers_on_diagonal_plan.cpp" />
+        <item itemvalue="C/C++ File.align_with_Z.cpp" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +262,45 @@
       <workItem from="1730764026477" duration="37000" />
       <workItem from="1730794024041" duration="12595000" />
       <workItem from="1730851235139" duration="5777000" />
-      <workItem from="1730890633514" duration="23673000" />
+      <workItem from="1730890633514" duration="36412000" />
+      <workItem from="1731077412818" duration="1806000" />
+      <workItem from="1731246810102" duration="42690000" />
+      <workItem from="1731398972405" duration="11664000" />
+      <workItem from="1731419804259" duration="6386000" />
+      <workItem from="1731952043088" duration="31249000" />
+      <workItem from="1732204331504" duration="4880000" />
+      <workItem from="1732481297144" duration="6265000" />
+      <workItem from="1732601457371" duration="1331000" />
+      <workItem from="1732792574743" duration="1213000" />
+      <workItem from="1733154093063" duration="15910000" />
+      <workItem from="1733785179683" duration="4715000" />
+      <workItem from="1733817828685" duration="7092000" />
+      <workItem from="1734019301137" duration="1442000" />
+      <workItem from="1734371832454" duration="12045000" />
+      <workItem from="1734893450395" duration="160000" />
+      <workItem from="1734893649890" duration="1970000" />
+      <workItem from="1734958404076" duration="1632000" />
+      <workItem from="1734991566034" duration="10372000" />
+      <workItem from="1735032908595" duration="4378000" />
+      <workItem from="1735248346357" duration="4844000" />
+      <workItem from="1735303310378" duration="7536000" />
+      <workItem from="1736208721676" duration="11934000" />
+      <workItem from="1736333776066" duration="20288000" />
+      <workItem from="1736416743486" duration="35783000" />
+      <workItem from="1736471475379" duration="18356000" />
+      <workItem from="1737637427541" duration="3126000" />
+      <workItem from="1738112850165" duration="6631000" />
+      <workItem from="1738149169677" duration="5020000" />
+      <workItem from="1739269323778" duration="93000" />
+      <workItem from="1739270170600" duration="3727000" />
+      <workItem from="1739279337700" duration="1882000" />
+      <workItem from="1739282256505" duration="569000" />
+      <workItem from="1739283097613" duration="3072000" />
+      <workItem from="1739286489759" duration="217000" />
+      <workItem from="1739286742234" duration="1252000" />
+      <workItem from="1739288056151" duration="117000" />
+      <workItem from="1739288310359" duration="3517000" />
+      <workItem from="1739291891952" duration="18666000" />
     </task>
     <task id="LOCAL-00001" summary="aegdhfh">
       <option name="closed" value="true" />
@@ -226,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730890667109</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="implementation of customized chaps functions">
+      <option name="closed" value="true" />
+      <created>1730921731692</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730921731692</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +369,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="aegdhfh" />
     <MESSAGE value="drawing line using mouse coordinates" />
-    <option name="LAST_COMMIT_MESSAGE" value="drawing line using mouse coordinates" />
+    <MESSAGE value="implementation of customized chaps functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementation of customized chaps functions" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
