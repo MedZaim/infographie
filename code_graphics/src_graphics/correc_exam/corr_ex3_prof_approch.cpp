@@ -1,12 +1,14 @@
 //
-// Created by Med on 2/11/2025.
-//
+// Created by ZAIM Med on 2/11/2025.
+// Pr. approach
+
 #include "graphics.h"
 #include <cmath>
 #include <vector>
 #include <iomanip>
 #include <iostream>
-
+#include <chrono>
+#include <thread>
 using namespace std;
 
 typedef vector<double> vector_t;
@@ -102,51 +104,54 @@ void reper() {
 }
 
 // Question 1
-//a) Une translation qui am`ene I `a A
-matrix_t T_tr = {
-    {1, 0, 0, 0},
-    {0, 1, 0, 0},
-    {0, 0, 1, 0},
-    {-50, -25, -10, 1}
-};
-//translation inverse
-matrix_t T_tr_inverse = {
-    {1, 0, 0, 0},
-    {0, 1, 0, 0},
-    {0, 0, 1, 0},
-    {50, 25, 10, 1}
-};
 
-//b) Une rotation autour de l’axe Z qui am`ene le segment (L) au plan XZ
+//a) Une rotation theta1 autour de Z qui am`ene le segment (L) au plan XZ
 
-//cos(teta1) = (AD/2) / √((AD/2)^2 + (AB/2)^2)= 50 / √(50^2 + 25^2)= 50 / √(2500 + 625)= 50 / √3125= 50 / 55.9= 0.89
+//cos(teta1) = AB/ √(AB^2 + BC^2) = 50 / √(50^2 + 25^2) = 50 / √(2500 + 625) = 50 / √3125 = 50 / 55.9 = 0.89
 double cos_theta1 = (50 / sqrt(2500 + 625));
 
-//sin(teta1) = (AB/2) / √((AD/2)^2 + (AB/2)^2)= 25 / √(50^2 + 25^2)= 25 / √(2500 + 625)= 25 / √3125= 25 / 55.9= 0.45
-double sin_theta1 = (25 / sqrt(2500 + 625));
+//sin(-teta1) = - BC / √(AB^2 + BC^2) = -25 / √(50^2 + 25^2) = -25 / √(2500 + 625) = -25 / √3125 = -25 / 55.9 = -0.45
+double sin_theta1 = (-25 / sqrt(2500 + 625));
 
-matrix_t T_RtZ = {
+matrix_t T_Rt_Z = {
     {cos_theta1, sin_theta1, 0, 0},
     {-sin_theta1, cos_theta1, 0, 0},
     {0, 0, 1, 0},
     {0, 0, 0, 1}
 };
 
-//c) Une rotation autour de l’axe X pour aligner le segment (L) avec l’axe Z
-// teta1 est negatif
 
-//cos(teta2) = AC / √(AE^2 + AC^2)= 100 / √(100^2 + 20^2) = 100 / √(10000 + 400) = 100 / √10400 = 100 / 101.98 = 0.98
+//b) Une rotation autour de teta2 l’axe Y pour rendre le segment (L) parallele a l’axe Z
+
+//cos(teta2) = AC / √(CG^2 + AC^2) = 100 / √(100^2 + 20^2) = 100 / √10400 = 100 / 101.98 = 0.98
 double cos_theta2 = (100 / sqrt(10000 + 400));
 
-//sin(-teta2) = -sin(teta2) = - AE / √(AE^2 + AC^2) = -20 / √(10000 + 400) = -20 / √10400 = -20 / 101.98 = -0.2
-double sin_theta2 = (-20 / sqrt(10000 + 400));
+//sin(teta2) = CG / √(CG^2 + AC^2) = 20 / √(100^2 + 20^2) = 20 / √10400 = 20 / 101.98 = 0.2
+double sin_theta2 = (20 / sqrt(10000 + 400));
 
-matrix_t T_RtX = {
-    {1, 0, 0, 0},
-    {0, cos_theta2, sin_theta2, 0},
-    {0, -sin_theta2, cos_theta2, 0},
+matrix_t T_Rt_Y = {
+    {cos_theta2, 0, -sin_theta2, 0},
+    {0, 1, 0, 0},
+    {sin_theta2, 0, cos_theta2, 0},
     {0, 0, 0, 1}
 };
+
+//c) Une translation qui am`ene I `a A. I(AI,0,0).
+// AI=√(AC^2+CG^2)/2 = √(100^2 + 20^2) / 2 = √(10000 + 400) / 2 = √10400 / 2 = 101.98 / 2 = 50.99
+matrix_t T_tr = {
+    {1, 0, 0, 0},
+    {0, 1, 0, 0},
+    {0, 0, 1, 0},
+    {-50.99, 0, 0, 1}
+};
+//translation inverse
+matrix_t T_tr_inverse = {
+    {1, 0, 0, 0},
+    {0, 1, 0, 0},
+    {0, 0, 1, 0},
+    {50.99, 0, 0, 1}
+};
+
 
 //d) Une rotation autour du segment (L) qui est d´ej`a align´e avec l’axe Z (rotation autour de Z) de 45°
 
@@ -158,7 +163,21 @@ matrix_t R_Z = {
 };
 
 //La matrice de la transformation totale s’´ecrit alors :
-matrix_t T = T_tr * T_RtZ * T_RtX * R_Z * transpose(T_RtX) * transpose(T_RtZ) * T_tr_inverse;
+matrix_t T = T_Rt_Z * T_Rt_Y * T_tr * R_Z * T_tr_inverse * transpose(T_Rt_Y) * transpose(T_Rt_Z);
+
+//pour effectue un rotation continue autour du segment on doit determiner La Matrice de rotation
+//en fonction de l'angle de rotation d_teta
+matrix_t T__teta(double d_teta){
+    matrix_t R_Z_d_teta = {
+        {cos(d_teta), -sin(d_teta), 0, 0},
+        {sin(d_teta), cos(d_teta), 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    };
+    return T_Rt_Z * T_Rt_Y * T_tr * R_Z_d_teta * T_tr_inverse * transpose(T_Rt_Y) * transpose(T_Rt_Z)  ;
+}
+
+
 
 // Question 2
 //La matrice de projection en perspective avec un centre de projection `a une distance d = 1000 est :
@@ -180,8 +199,26 @@ matrix_t projection_perspective(const matrix_t parallelogramme) {
     return res;
 }
 
+void rotate(matrix_t figure, int color=YELLOW) {
+    double d_teta = 0.01;
+    // Rotation continue autour du segment
+    for (;;) {
+        clearmouseclick(WM_LBUTTONDOWN);
+        cleardevice();
+        setcolor(3);
+        reper();
+        figure = figure * T__teta(d_teta);
+        tracer_p(figure, color);
+        // Sleep for 10 milliseconds
+        std::this_thread::sleep_for(std::chrono::milliseconds(30));
+        if (ismouseclick(WM_LBUTTONDOWN)) {
+            break;
+        }
+    }
+}
+
 int main() {
-    initwindow(400, 300, "Rotation autour du segment (L) de 45°");
+    initwindow(400, 300, "Rotation/(L) (prof suggestion)");
 
     matrix_t parallelogramme = {
         {0, 0, 0, 1}, // A
@@ -197,8 +234,8 @@ int main() {
     reper();
     tracer_p(parallelogramme, WHITE);
     getch();
-    matrix_t rotated_parallelogramme = parallelogramme * T;
-    tracer_p(rotated_parallelogramme, YELLOW);
+    cleardevice();
+    rotate(parallelogramme);
     getch();
     closegraph();
     /////////////////////////////////////////////////////////////////////////
