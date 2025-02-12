@@ -1,9 +1,9 @@
-#include <graphics.h>
+
 #include <conio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
-#include "../../includs/chapes.h"
+#include "./../../includs/graphics_utils.h"
 using namespace std;
 
 #define Pi 3.1415926535897932384

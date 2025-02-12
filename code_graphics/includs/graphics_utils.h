@@ -204,16 +204,17 @@ matrix_t matrix_multiply(matrix_t mat1, matrix_t mat2) {
 }
 
 // Utility function to display a matrix
-void affiche(const matrix_t &m) {
-    for (const auto &row: m) {
-        for (double val: row) {
-            cout << fixed << setprecision(2) << val << "   ";
-
+void affich(matrix_t mat, string label) {
+    cout << label << ":[" << endl;
+    for (int i = 0; i < mat.size(); i++) {
+        cout << "     {";
+        for (int j = 0; j < mat[i].size(); j++) {
+            cout << setw(8) << std::round(mat[i][j] * 1000) / 1000 << " ";
         }
-        cout << endl;
+        cout << "}" << endl;
     }
+    cout << "]" << endl;
 }
-
 
 matrix_t inverse(const matrix_t &mat) {
     int n = mat.size();
@@ -903,8 +904,7 @@ matrix_t rotation_x(matrix_t cube, double angle) {
             {0, -sin(angle), cos(angle), 0},
             {0, 0,           0,          1}
     };
-    matrix_t result = cube * mat_rot_X;
-    return result;
+    return cube * mat_rot_X;
 }
 
 matrix_t rotation_y(matrix_t cube, double angle) {
@@ -915,8 +915,7 @@ matrix_t rotation_y(matrix_t cube, double angle) {
             {sin(angle), 0, cos(angle),  0},
             {0,          0, 0,           1}
     };
-    matrix_t result = matrix_multiply(cube, mat_rot_y);
-    return result;
+    return  cube*mat_rot_y;
 }
 
 matrix_t rotation_z(matrix_t cube, double angle) {
@@ -927,8 +926,7 @@ matrix_t rotation_z(matrix_t cube, double angle) {
             {0,           0,          1, 0},
             {0,           0,          0, 1}
     };
-    matrix_t result = cube * mat_rot_z;
-    return result;
+    return  cube * mat_rot_z;
 }
 
 matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
@@ -938,8 +936,7 @@ matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
             {0,  0,  sz, 0},
             {0,  0,  0,  1}
     };
-    matrix_t result = matrix_multiply(cube, mat_scale);
-    return result;
+    return cube * mat_scale;
 }
 
 matrix_t operator*(const matrix_t &a, const matrix_t &b) {
@@ -947,27 +944,12 @@ matrix_t operator*(const matrix_t &a, const matrix_t &b) {
 }
 
 
-matrix_t get_perspective_matrix(vector_t viewpoint, vector_t r0, vector_t n) {
-    double a = viewpoint[0];
-    double b = viewpoint[1];
-    double c = viewpoint[2];
-
-    double x0 = r0[0];
-    double y0 = r0[1];
-    double z0 = r0[2];
-
-    double n1 = n[0];
-    double n2 = n[1];
-    double n3 = n[2];
-
-    double d0 = n1 * x0 + n2 * y0 + n3 * z0;
-    double d = n1 * a + n2 * b + n3 * c;
-
+matrix_t get_perspective_matrix_Z_d(double d) {
     matrix_t T_perspective = {
-            {1 + a * n1 / d, b * n1 / d,     c * n1 / d,     n1 / d},
-            {a * n2 / d,     1 + b * n2 / d, c * n2 / d,     n2 / d},
-            {a * n3 / d,     b * n3 / d,     1 + c * n1 / d, n1 / d},
-            {a - a * d0 / d, b - b * d0 / d, c - c * d0 / d, 1}  // Corrected fourth row
+            {1, 0, 0, 0},
+            {0, 1, 0, 0},
+            {0, 0, 1, 1.0 / d},
+            {0, 0, 0, 0}
     };
     return T_perspective;
 }
@@ -1010,8 +992,7 @@ matrix_t get_perspective_calculated_matrix(vector_t viewpoint, vector_t r0, vect
     return mat_translation_to_center * mat_perspective * mat_translation_invers;
 };
 
-matrix_t
-get_perspective_calculated_matrix(double a, double b, double c, double x0, double y0, double z0, double n1, double n2,
+matrix_t get_perspective_calculated_matrix(double a, double b, double c, double x0, double y0, double z0, double n1, double n2,
                                   double n3) {
     vector_t viewpoint = {a, b, c};
     vector_t r0 = {x0, y0, z0};
@@ -1031,7 +1012,7 @@ matrix_t divid_on_w(matrix_t points) {
 
 // Perspective projection matrix for viewpoint at (a,b,c)
 matrix_t perspective(matrix_t points, vector_t viewpoint, vector_t r0, vector_t n) {
-    matrix_t res = points * get_perspective_matrix(viewpoint, r0, n);
+   matrix_t res = points ;//* get_perspective_matrix(viewpoint, r0, n);
     return divid_on_w(res);
 };
 
@@ -1071,7 +1052,6 @@ void centre3D(int *X, int *Y, int *Z) {
 
 matrix_t get_cavalier_matrix(double angle) {
     double angle_rad = angle * PI / 180;
-
     return Tcv;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1175,7 +1155,7 @@ void bezierCubic(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3)
 }
 
 
-matrix_t get_parallelepide(double a, double b, double c, double w, double is_homogen = 0) {
+matrix_t get_parallelogram(double a, double b, double c, double is_homogen = 0) {
     if (is_homogen) {
 
         return {

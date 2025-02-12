@@ -83,12 +83,12 @@ void draw_cube(const matrix_t cube, double k, double h) {
 }
 
 
-void animate_cube_rotation(const matrix_t cube, double k, double h) {
-    double angle = 0;
+void animate_cube_rotation( matrix_t cube, double k, double h) {
+    double angle = 0.09;
 
     while (true) {
-        angle += 0.02 * PI; // Increment angle
-        rotation_x(cube, k, h, angle);
+        cube = rotation_x(cube, angle);
+        draw_cube(cube*Tcb, k, h);
         delay(50);
         cleardevice();
         repere();

@@ -1,32 +1,13 @@
-#include "C:\Users\Med\Desktop\desktop_importent\stady_work\infographie\code_graphics\includs\graphics_utils.h"
-#include <graphics.h>
-#include <cmath>
-#include <iostream>
+#include ".\..\..\includs\graphics_utils.h"
 
-// Define constants for screen size
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
 
 // Function to draw a vector from origin
-void drawVector(int x, int y, int color,int lw=1) {
-
-    line_bresenham(0, 0,  x,  y, color, lw); // Draw the arrow shaft
+void drawVector(vector_t v, int color,int lw=1) {
+    line_bresenham(0, 0,  v[0],  v[1], color, lw); // Draw the arrow shaft
     setcolor(color);
-    circle( x,  y, 5); // Draw the arrow tip
+    circle( v[0],  v[1], 5); // Draw the arrow tip
 }
 
-// Function to multiply a vector by a transformation matrix
-void applyTransformation(double vec[4], double matrix[4][4]) {
-    double result[4] = {0, 0, 0, 0};
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            result[i] += matrix[i][j] * vec[j];
-        }
-    }
-    for (int i = 0; i < 4; ++i) {
-        vec[i] = result[i];
-    }
-}
 
 // Function to create a rotation matrix around the X-axis
 void createRotationMatrixX(double angle, double matrix[4][4]) {
@@ -40,17 +21,7 @@ void createRotationMatrixX(double angle, double matrix[4][4]) {
     matrix[2][2] = cos(angle);
 }
 
-// Function to create a rotation matrix around the Y-axis
-void createRotationMatrixY(double angle, double matrix[4][4]) {
-    for (int i = 0; i < 4; ++i)
-        for (int j = 0; j < 4; ++j)
-            matrix[i][j] = (i == j) ? 1 : 0; // Identity matrix
 
-    matrix[0][0] = cos(angle);
-    matrix[0][2] = sin(angle);
-    matrix[2][0] = -sin(angle);
-    matrix[2][2] = cos(angle);
-}
 int main() {
     // Initialize graphics mode
     int gd = DETECT, gm;
@@ -67,11 +38,8 @@ int main() {
     repere(getmaxx() / 2, getmaxy() / 2);
 
     // Original vector V(a, b, c)
-    double vector[4] = {100, 150, 200, 1}; // Homogeneous coordinates
+    vector_t vector = {100, 150, 200, 1}; // Homogeneous coordinates
 
-    // Project to 2D screen (simplified projection)
-    double screenX = vector[0];
-    double screenY = vector[1];
 
     // Draw the original vector in red
     drawVector(screenX, screenY, RED, 5);
