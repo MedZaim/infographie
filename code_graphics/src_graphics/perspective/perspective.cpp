@@ -1,12 +1,42 @@
-#include <cmath>
-#include <iostream>
-#include <stdio.h>
-#include <math.h>
-#include <graphics.h>
-#include <stdlib.h>
+
 #include "../../includs/graphics_utils.h"
 
 
+matrix_t get_perspective_matrix_o_r0_n(double x0, double y0,double z0, double n1, double n2, double n3) {
+    double d0 = -(n1*x0+n2*y0+n3*z0);
+    matrix_t T_perspective = {
+        {1, 0, 0, n1 / d0},
+        {0, 1, 0, n2 / d0},
+        {0, 0, 1, n3 / d0},
+        {0, 0, 0, 1}
+    };
+    return T_perspective;
+}
+
+matrix_t get_perspective_matrix_o_r0_n(vector_t r0, vector_t n) {
+    return get_perspective_matrix_o_r0_n(r0[0], r0[1], r0[2], n[0], n[1], n[2]);
+}
+
+matrix_t get_perspective_matrix_cp_r0_n(double a, double b, double c, double x0, double y0, double z0, double n1, double n2, double n3) {
+    matrix_t T_translation = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {-a, -b, -c, 1}
+    };
+    matrix_t T_perspective = get_perspective_matrix_o_r0_n(x0, y0, z0, n1, n2, n3);
+    matrix_t T_translation_invers = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {a, b, c, 1}
+    };
+    return T_translation * T_perspective * T_translation_invers;
+}
+
+matrix_t get_perspective_matrix_cp_r0_n(vector_t center_proj, vector_t r0, vector_t n) {
+    return get_perspective_matrix_cp_r0_n(center_proj[0], center_proj[1], center_proj[2], r0[0], r0[1], r0[2], n[0], n[1], n[2]);
+}
 void init_graph() {
     int g = DETECT, m;
     initgraph(&g, &m, (char *) "C:\\TC\\BGI");
@@ -32,7 +62,30 @@ vector_t findIntersection(double x1, double y1, double x2, double y2) {
     vecteur[1] = y1 - vecteur[0] * x1;
     return vecteur;
 }
+void tracer_p(matrix_t cube, int color = GREEN) {
+    setcolor(color);
+    int x_ofset = getmaxx() / 2, y_ofset = getmaxy() / 2;
+    line(cube[0][0] + x_ofset, -cube[0][1] + y_ofset, cube[1][0] + x_ofset, -cube[1][1] + y_ofset);
+    // A--> B : plan de projection
+    line(cube[0][0] + x_ofset, -cube[0][1] + y_ofset, cube[3][0] + x_ofset, -cube[3][1] + y_ofset); // A--> D
+    line(cube[0][0] + x_ofset, -cube[0][1] + y_ofset, cube[4][0] + x_ofset, -cube[4][1] + y_ofset); // A--> E
+    line(cube[1][0] + x_ofset, -cube[1][1] + y_ofset, cube[2][0] + x_ofset, -cube[2][1] + y_ofset); // B--> C
+    line(cube[1][0] + x_ofset, -cube[1][1] + y_ofset, cube[5][0] + x_ofset, -cube[5][1] + y_ofset); // B--> G
+    line(cube[2][0] + x_ofset, -cube[2][1] + y_ofset, cube[3][0] + x_ofset, -cube[3][1] + y_ofset); // C--> D
 
+    line(cube[2][0] + x_ofset, -cube[2][1] + y_ofset, cube[6][0] + x_ofset, -cube[6][1] + y_ofset); // C--> H
+    line(cube[3][0] + x_ofset, -cube[3][1] + y_ofset, cube[7][0] + x_ofset, -cube[7][1] + y_ofset); // D--> H
+    line(cube[4][0] + x_ofset, -cube[4][1] + y_ofset, cube[5][0] + x_ofset, -cube[5][1] + y_ofset); // E--> F
+    line(cube[4][0] + x_ofset, -cube[4][1] + y_ofset, cube[7][0] + x_ofset, -cube[7][1] + y_ofset); // E--> H :
+    line(cube[5][0] + x_ofset, -cube[5][1] + y_ofset, cube[6][0] + x_ofset, -cube[6][1] + y_ofset); // F--> G
+    line(cube[6][0] + x_ofset, -cube[6][1] + y_ofset, cube[7][0] + x_ofset, -cube[7][1] + y_ofset); // G--> H
+
+    for (int i = 0; i < 8; i++) {
+        int x = cube[i][0], y = cube[i][1], z = cube[i][2];
+        char label[3] = {(char) ('A' + i), '\0'}; // Nommer les sommets A, B, C...
+        outtextxy(x + x_ofset + 2, -y + y_ofset + 1, label);
+    }
+}
 void tracer_points_de_fuit(matrix_t resRot, int color = 15, int lw = 1) {
     vector_t vecteur01 = findIntersection(resRot[0][0], resRot[0][1], resRot[3][0], resRot[3][1]);
     vector_t vecteur02 = findIntersection(resRot[4][0], resRot[4][1], resRot[7][0], resRot[7][1]);
@@ -64,85 +117,28 @@ void tracer_points_de_fuit(matrix_t resRot, int color = 15, int lw = 1) {
 
 
 int main() {
-    // Initialize the graphics library and create a graphical window
-    init_graph();
+
     initwindow(800, 500, "Graphics Window");
 
-    // Center de projection
-    double a = 1, b = 1, c = 1;
+    matrix_t cube = get_parallelogram(200,200,200,1);
 
-    // Plan de projection
-    double x0 = 1, y0 = 1, z0 = 1; // Poin de plan de projection
-    double n1 = 1, n2 = 1, n3 = 100; // Vecteur normal
-
-    double d0 = n1 * x0 + n2 * y0 + n3 * z0;
-    double d = n1 * a + n2 * b + n3 * c;
+    vector_t center_proj = {0, 0, 400};
+    vector_t r0 = {0, 0, 200};
+    vector_t n = {0, 0, 200};
 
 
+    matrix_t T_tr = get_perspective_matrix_cp_r0_n(center_proj, r0, n);
 
-    // Define the vertices of a 3D cube in homogeneous coordinates (x, y, z, w)
-    matrix_t cube = {
-            {0,   0,   0,   1}, // Vertex A
-            {200, 0,   0,   1}, // Vertex B
-            {200, 200, 0,   1}, // Vertex C
-            {0,   200, 0,   1}, // Vertex D
-            {0,   0,   200, 1}, // Vertex E
-            {200, 0,   200, 1}, // Vertex F
-            {200, 200, 200, 1}, // Vertex G
-            {0,   200, 200, 1} // Vertex H
-    };
-
-
-   // cube = rotation_x(cube, PI/6);
-    //cube = rotation_y(cube, PI/6);
-    Tracer_cube(cube);
-    getch();
-    cube = rotation_x(cube, PI/6);
-    cube = rotation_y(cube, PI/6);
-    matrix_t cube_transformd = perspective(cube , a, b, c, x0, y0, z0, n1, n2, n3);
-
-    //matrix_t cube_transformd = cube * get_perspective_calculated_matrix(a, b, c, x0, y0, z0, n1, n2, n3);
+    matrix_t cube_transformd = divid_on_w(cube * T_tr);
+   // tracer_points_de_fuit(cube_transformd);
     cleardevice();
-    cube_transformd = scaling(cube_transformd, 1, 1, 1);
 
-    Tracer_cube(cube_transformd);
-    affiche(cube_transformd);
+    tracer_p(cube_transformd);
+
+    affich(cube, "cube");
+    affich(T_tr, "T_tr");
+    affich(cube_transformd, "cube_transformd");
     getch();
     return 0;
 }
 
-/*
-    // Step 1: Initial translation to the origin
-    matrix_t T_pv = {
-            {1 + a * n1 / d, b * n1 / d,     c * n1 / d,     n1 / d},
-            {a * n2 / d,     1 + b * n2 / d, c * n2 / d,     n2 / d},
-            {a * n3 / d,     b * n3 / d,     1 + c * n1 / d, n1 / d},
-            {a - a * d0 / d, b - b * d0 / d, c - c * d0 / d, 1}  // Corrected fourth row
-    };
-*/
-/*
-
-    // Step 1: Initial translation to the origin
-    matrix_t T_trans_to_origin = {
-            {1,  0,  0,  0},
-            {0,  1,  0,  0},
-            {0,  0,  1,  0},
-            {-a, -b, -c, 1}
-    };
-
-    // Perspective projection matrix from origin
-    matrix_t T_perspective_from_origin = {
-            {1, 0, 0, n1 / d0},
-            {0, 1, 0, n2 / d0},
-            {0, 0, 1, n3 / d0},
-            {0, 0, 0, 1}
-    };
-
-    // Step 5: Inverse of the initial translation to return to original space
-    matrix_t T_trans_Inverse = {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {a, b, c, 1}
-    };
-*/

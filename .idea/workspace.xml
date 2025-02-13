@@ -26,23 +26,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="angle theta1 correction and record execution video">
-      <change afterPath="$PROJECT_DIR$/code_graphics/projection_sur_diagonale.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cube.exe" afterDir="false" />
+    <list default="true" id="0a1dc033-3de7-48b4-823a-0681ad01e1d1" name="Changes" comment="fixing and cleaning up code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/cube.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/rotated_cube.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/includs/graphics_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/includs/math_trix.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/align_with_Z.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/alin/align_with_Z.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/alin/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/alin/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/projection_sur_diagonale.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/corr_ex3_.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/corr_ex3_my_approch.exe" beforeDir="false" afterPath="$PROJECT_DIR$/corr_ex3_my_approch.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corr_ex3_prof_approch.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/perspective_diagonale_test3.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/polycone_main.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/polyedere.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/alin/align_with_Z.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/alin/align_with_Z.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/alin/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/control/control.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/control/control.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/control/courbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/control/courbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/mouse_click/mouse_click.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/pendule/pendule.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/pendule/pendule.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_graphics/src_graphics/perspective/perspective.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code_graphics/src_graphics/perspective/perspective.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,14 +54,15 @@
     &quot;assignee&quot;: &quot;MedZaim&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/MedZaim/infographie.git&quot;,
-    &quot;accountId&quot;: &quot;af5b7c1c-28a2-451f-bee2-988c17854d44&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/MedZaim/infographie.git",
+    "accountId": "be571210-986c-458a-8b9c-b6c807e7db04"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/code_graphics/rotated_cube.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/code_graphics/projection_sur_diagonale.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/code_graphics/rotated_cube.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/code_graphics/src_graphics/alin/align_with_Z.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/code_graphics/src_graphics/correc_exam/corr_ex3_my_approch.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/code_graphics/src_graphics/ideas/heeelooooooo.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -89,76 +83,76 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "C/C++ File.align_with_Z.cpp.executor": "Run",
-    "C/C++ File.aligner.cpp.executor": "Run",
-    "C/C++ File.aligner_avec_z.cpp.executor": "Run",
-    "C/C++ File.aliiign.cpp.executor": "Run",
-    "C/C++ File.biezier.cpp.executor": "Run",
-    "C/C++ File.chapes.cpp.executor": "Run",
-    "C/C++ File.control.cpp.executor": "Run",
-    "C/C++ File.corr_ex3_.cpp.executor": "Run",
-    "C/C++ File.corr_ex3_my_approch.cpp.executor": "Run",
-    "C/C++ File.corr_ex3_prof_approch.cpp.executor": "Run",
-    "C/C++ File.corr_ex_courb.cpp.executor": "Run",
-    "C/C++ File.courbe.cpp.executor": "Run",
-    "C/C++ File.cub.cpp (1).executor": "Run",
-    "C/C++ File.cub.cpp.executor": "Run",
-    "C/C++ File.cube.cpp.executor": "Run",
-    "C/C++ File.drow_mouse.cpp.executor": "Run",
-    "C/C++ File.fleure.cpp.executor": "Run",
-    "C/C++ File.flr.cpp.executor": "Run",
-    "C/C++ File.heeelooooooo.cpp.executor": "Debug",
-    "C/C++ File.ideas.cpp.executor": "Run",
-    "C/C++ File.les_3_pts_de_fuite.cpp (1).executor": "Run",
-    "C/C++ File.les_3_pts_de_fuite.cpp.executor": "Run",
-    "C/C++ File.main.cpp.executor": "Run",
-    "C/C++ File.mains.cpp (1).executor": "Run",
-    "C/C++ File.mains.cpp.executor": "Run",
-    "C/C++ File.math_trix.cpp.executor": "Run",
-    "C/C++ File.mouse_click.cpp.executor": "Run",
-    "C/C++ File.pendule.cpp.executor": "Run",
-    "C/C++ File.perspective.cpp.executor": "Run",
-    "C/C++ File.perspective_américain.cpp.executor": "Run",
-    "C/C++ File.perspective_diagonale_test3.cpp.executor": "Run",
-    "C/C++ File.polycone_main.cpp.executor": "Run",
-    "C/C++ File.polyedere.cpp.executor": "Run",
-    "C/C++ File.projection_cub_pers_on_diagonal_plan.cpp.executor": "Run",
-    "C/C++ File.projection_sur_diagonale.cpp.executor": "Run",
-    "C/C++ File.pt_de_fuite_3.cpp.executor": "Run",
-    "C/C++ File.test3.cpp.executor": "Run",
-    "C/C++ File.test4.cpp.executor": "Run",
-    "C/C++ File.testing2.cpp.executor": "Run",
-    "C/C++ File.tsting.cpp.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Med/Desktop/desktop_importent/stady_work/infographie/code_graphics/src_graphics/correc_exam",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;C/C++ File.align_with_Z.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.aligner.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.aligner_avec_z.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.aliiign.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.biezier.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.chapes.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.control.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.corr_ex3_.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.corr_ex3_my_approch.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.corr_ex3_prof_approch.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.corr_ex_courb.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.courbe.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.cub.cpp (1).executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.cub.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.cube.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.drow_mouse.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.fleure.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.flr.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.heeelooooooo.cpp.executor&quot;: &quot;Debug&quot;,
+    &quot;C/C++ File.ideas.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.les_3_pts_de_fuite.cpp (1).executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.les_3_pts_de_fuite.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.mains.cpp (1).executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.mains.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.math_trix.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.mouse_click.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.pendule.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.perspective.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.perspective_américain.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.perspective_diagonale_test3.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.polycone_main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.polyedere.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.projection_cub_pers_on_diagonal_plan.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.projection_sur_diagonale.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.pt_de_fuite_3.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.test3.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.test4.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.testing2.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.tsting.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Med/Desktop/desktop_importent/stady_work/infographie/code_graphics/src_graphics/correc_exam&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Med\Desktop\desktop_importent\stady_work\infographie\code_graphics\src_graphics\correc_exam" />
@@ -172,16 +166,16 @@
       <recent name="C:\Users\lenovo\Desktop\stady_work\infographie\code_graphics\src_graphics\points_de_fuite" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.projection_sur_diagonale.cpp">
+  <component name="RunManager" selected="C/C++ File.perspective.cpp">
     <configuration name="Unnamed" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" nameIsGenerated="true" PROGRAM_PARAMS="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <option name="toolchainName" value="MinGW" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="corr_ex3_.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="corr_ex3_.cpp" CONFIG_NAME="corr_ex3_.cpp">
+    <configuration name="align_with_Z.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="align_with_Z.cpp" CONFIG_NAME="align_with_Z.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\correc_exam\corr_ex3_.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\alin\align_with_Z.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
@@ -193,16 +187,16 @@
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="corr_ex3_prof_approch.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="corr_ex3_prof_approch.cpp" CONFIG_NAME="corr_ex3_prof_approch.cpp">
+    <configuration name="cube.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="cube.cpp" CONFIG_NAME="cube.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\src_graphics\correc_exam\corr_ex3_prof_approch.cpp" />
+      <option name="sourceFile" value="code_graphics\cube.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cube.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="cube.cpp" CONFIG_NAME="cube.cpp">
+    <configuration name="perspective.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="infographie" TARGET_NAME="perspective.cpp" CONFIG_NAME="perspective.cpp">
       <option name="compilerOptions" value="-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32" />
-      <option name="sourceFile" value="code_graphics\cube.cpp" />
+      <option name="sourceFile" value="code_graphics\src_graphics\perspective\perspective.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
@@ -216,19 +210,19 @@
     </configuration>
     <list>
       <item itemvalue="C/C++ File.Unnamed" />
+      <item itemvalue="C/C++ File.perspective.cpp" />
+      <item itemvalue="C/C++ File.align_with_Z.cpp" />
       <item itemvalue="C/C++ File.projection_sur_diagonale.cpp" />
       <item itemvalue="C/C++ File.cube.cpp" />
       <item itemvalue="C/C++ File.corr_ex3_my_approch.cpp" />
-      <item itemvalue="C/C++ File.corr_ex3_prof_approch.cpp" />
-      <item itemvalue="C/C++ File.corr_ex3_.cpp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.perspective.cpp" />
+        <item itemvalue="C/C++ File.align_with_Z.cpp" />
         <item itemvalue="C/C++ File.projection_sur_diagonale.cpp" />
         <item itemvalue="C/C++ File.cube.cpp" />
         <item itemvalue="C/C++ File.corr_ex3_my_approch.cpp" />
-        <item itemvalue="C/C++ File.corr_ex3_prof_approch.cpp" />
-        <item itemvalue="C/C++ File.corr_ex3_.cpp" />
       </list>
     </recent_temporary>
   </component>
@@ -291,6 +285,7 @@
       <workItem from="1739288056151" duration="117000" />
       <workItem from="1739288310359" duration="3517000" />
       <workItem from="1739291891952" duration="46339000" />
+      <workItem from="1739401540684" duration="9709000" />
     </task>
     <task id="LOCAL-00001" summary="aegdhfh">
       <option name="closed" value="true" />
@@ -364,7 +359,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739378035169</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixing and cleaning up code">
+      <option name="closed" value="true" />
+      <created>1739401609663</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739401609663</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,7 +397,8 @@
     <MESSAGE value="implementation of customized chaps functions" />
     <MESSAGE value="commit init" />
     <MESSAGE value="angle theta1 correction and record execution video" />
-    <option name="LAST_COMMIT_MESSAGE" value="angle theta1 correction and record execution video" />
+    <MESSAGE value="fixing and cleaning up code" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing and cleaning up code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

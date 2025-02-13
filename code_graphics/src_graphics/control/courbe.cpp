@@ -58,18 +58,17 @@ void  display_reper(matrix_t reper,int color=YELLOW) {
     setcolor(color);
     char bufer[] = {'X', 'Y', 'Z', '\0'};
     int x0=0,y0=0;
-    centre(&x0, &y0);
     cout<<"reper size:"<<reper.size()<<endl;
     cout<<"reper:["<<endl;
     for (int i = 0; i < reper.size(); i++) {
         int x = reper[i][0], y = reper[i][1];
-        centre(&x, &y);
+
         line(x0, y0, x, y);
         //cercle
 
         char label[3] = {bufer[i], '\0'}; // Nommer les sommets A, B, C...
         outtextxy(x, y, label);
-        d_centre(&x, &y);
+
         cercle_bresenham(x, y, 1, color);
         cout<<"[x="<<x<<", y="<<y<<"]"<<endl;
 
@@ -88,7 +87,7 @@ int main() {
 
 
     // Define the vertices of a 3D cube in homogeneous coordinates (x, y, z, w)
-    matrix_t cube = get_parallelepide(200, 100, 100, 1, 1);
+    matrix_t cube = get_parallelogram(200, 100, 100,  1);
 
     cercle_bresenham(cube[3][0], cube[3][1],5,1);
 

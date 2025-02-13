@@ -55,16 +55,13 @@ void display_reper(matrix_t reper, int color = YELLOW) {
     setcolor(color);
     char bufer[] = {'X', 'Y', 'Z', '\0'};
     int x0 = 0, y0 = 0;
-    centre(&x0, &y0);
     for (int i = 0; i < reper.size(); i++) {
         int x = reper[i][0], y = reper[i][1];
-        centre(&x, &y);
         line(x0, y0, x, y);
         //cercle
 
         char label[3] = {bufer[i], '\0'}; // Nommer les sommets A, B, C...
         outtextxy(x, y, label);
-        d_centre(&x, &y);
         cercle_bresenham(x, y, 1, color);
     }
 

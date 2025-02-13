@@ -25,16 +25,6 @@ void init_graph_() {
     initgraph(&g, &m, (char *) "");
 }
 
-void centre(int *x, int *y) {
-    *x = *x + getmaxx() / 2;
-    *y = getmaxy() / 2 - *y;
-}
-
-void d_centre(int *x, int *y) {
-    *x = *x - getmaxx() / 2;
-    *y = getmaxy() / 2 - *y;
-}
-
 void repere(int xc, int yc) {
     int xm = getmaxx() / 2;
     int ym = getmaxy() / 2;
@@ -43,17 +33,14 @@ void repere(int xc, int yc) {
 }
 
 void pixel5(int x, int y, int color) {
-    centre(&x, &y);
     putpixel(x, y, color);
     putpixel(x + 1, y - 1, color);
     putpixel(x - 1, y + 1, color);
     putpixel(x + 1, y + 1, color);
     putpixel(x - 1, y - 1, color);
-    d_centre(&x, &y);
 }
 
 void pixel9(int x, int y, int color) {
-    centre(&x, &y);
     putpixel(x, y, color);
     putpixel(x + 1, y, color);
     putpixel(x, y + 1, color);
@@ -63,7 +50,6 @@ void pixel9(int x, int y, int color) {
     putpixel(x - 1, y + 1, color);
     putpixel(x + 1, y + 1, color);
     putpixel(x - 1, y - 1, color);
-    d_centre(&x, &y);
 }
 
 void pixel13(int x, int y, int color) {
@@ -87,7 +73,8 @@ void pixel13(int x, int y, int color) {
 }
 
 void pixel(int x, int y, int color, int lw = 1) {
-    centre(&x, &y);
+    x += getmaxx() / 2;
+    y = getmaxy() / 2 - y;
     switch (lw) {
         case 5:
             pixel5(x, y, color);
@@ -102,7 +89,6 @@ void pixel(int x, int y, int color, int lw = 1) {
             putpixel(x, y, color);
             break;
     }
-    d_centre(&x, &y);
 }
 
 void Tracer_cube(matrix_t resRot, int color = WHITE, int lw = 1) {
@@ -124,7 +110,8 @@ void Tracer_cube(matrix_t resRot, int color = WHITE, int lw = 1) {
     setcolor(color);
     for (int i = 0; i < 8; i++) {
         int x = resRot[i][0], y = resRot[i][1], z = resRot[i][2];
-        centre(&x, &y);
+        x += getmaxx() / 2;
+        y = getmaxy() / 2 - y;
         char label[3] = {(char) ('A' + i), '\0'}; // Nommer les sommets A, B, C...
         outtextxy(x, y, label);
     }
@@ -466,45 +453,42 @@ Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
 
 // Bresenham's line algorithm
 void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
-    // printf("__> line_bresenhame called with ::x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
-    int dx = x2 - x1;
-    int dy = y2 - y1;
-    int px = (dx > 0) ? 1 : -1;
-    int py = (dy > 0) ? 1 : -1;
+    printf("__> line_bresenham called with :: x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
+
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int px = (x2 > x1) ? 1 : -1;
+    int py = (y2 > y1) ? 1 : -1;
+
     int x = x1, y = y1;
-    dx = abs(dx);
-    dy = abs(dy);
+    pixel(x, y, color, lw); // Ensure first pixel is drawn
+
     long s;
-
-
-    if (dx > dy) {
-        int i = 0;
+    if (dx > dy) {  // Case: horizontal-ish line
         s = 2 * dy - dx;
-        while (x != x2) {
-            if (s > 0) {
-                y += py;
-                s += 2 * (dy - dx);
-            } else {
-                s += 2 * dy;
-            }
+        do {
             x += px;
-            pixel(x, y, color, lw);
-        }
-    } else {
-        s = 2 * dx - dy;
-        int i = 0;
-        while (y != y2) {
-            if (s > 0) {
-                x += px;
-                s += 2 * (dx - dy);
-            } else {
-                s += 2 * dx;
+            if (s >= 0) {
+                y += py;
+                s -= 2 * dx;
             }
-            y += py;
+            s += 2 * dy;
             pixel(x, y, color, lw);
-        }
+        } while (x != x2);
+    } else {  // Case: vertical-ish line
+        s = 2 * dx - dy;
+        do {
+            y += py;
+            if (s >= 0) {
+                x += px;
+                s -= 2 * dy;
+            }
+            s += 2 * dx;
+            pixel(x, y, color, lw);
+        } while (y != y2);
     }
 }
+
 
 /*void line_bresenham(double x1, double y1, double x2, double y2, int color, int lw) {
     line_bresenham((int) x1, (int) y1, (int) x2, (int) y2, color, lw);
@@ -942,8 +926,16 @@ matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
 matrix_t operator*(const matrix_t &a, const matrix_t &b) {
     return matrix_multiply(a, b);
 }
+matrix_t operator*(const matrix_t &a, const vector_t &v) {
+    return a * matrix_t{v};
+}
+matrix_t operator*(const vector_t &v, const matrix_t &a ) {
+    return  matrix_t{v} * a;
+}
 
-
+matrix_t operator*(const vector_t &v, const  vector_t &w ) {
+    return  matrix_t{v} * matrix_t{w};
+}
 matrix_t get_perspective_matrix_Z_d(double d) {
     matrix_t T_perspective = {
             {1, 0, 0, 0},
@@ -1010,26 +1002,6 @@ matrix_t divid_on_w(matrix_t points) {
     return res;
 }
 
-// Perspective projection matrix for viewpoint at (a,b,c)
-matrix_t perspective(matrix_t points, vector_t viewpoint, vector_t r0, vector_t n) {
-   matrix_t res = points ;//* get_perspective_matrix(viewpoint, r0, n);
-    return divid_on_w(res);
-};
-
-// Perspective projection matrix for viewpoint at (a,b,c)
-matrix_t perspective(vector_t point, vector_t viewpoint, vector_t r0, vector_t n) {
-    matrix_t points = {point};
-    return perspective(points, viewpoint, r0, n);
-};
-
-matrix_t perspective(matrix_t cube, double a, double b, double c, double x0, double y0, double z0, double n1, double n2,
-                     double n3) {
-    vector_t viewpoint = {a, b, c};
-    vector_t r0 = {x0, y0, z0};
-    vector_t n = {n1, n2, n3};
-    return perspective(cube, viewpoint, r0, n);
-};
-
 matrix_t cavalier(matrix_t points) {
     matrix_t result = points * Tcv;
     return result;
@@ -1053,6 +1025,41 @@ void centre3D(int *X, int *Y, int *Z) {
 matrix_t get_cavalier_matrix(double angle) {
     double angle_rad = angle * PI / 180;
     return Tcv;
+}
+
+// Function to draw a vector from origin
+void drawVector(vector_t v, int color = WHITE, int lw = 5) {
+    line_bresenham(0, 0, v[1], v[2], color, lw); // Draw the arrow shaft
+    setcolor(color);
+    circle(v[1] + getmaxx() / 2, getmaxy() / 2 - v[2], 5); // Draw the arrow tip
+}
+
+
+double get_theta(vector_t V) {
+    return atan2(sqrt(V[0] * V[0] + V[1] * V[1]), V[2]);
+}
+
+double get_phi(vector_t V) {
+    return atan2(V[1], V[0]);
+}
+
+matrix_t get_matrix_alin_v_with_Z(vector_t V) {
+    double theta = get_theta(V);
+    double phi = get_phi(V);
+
+    matrix_t T_RtZ = {
+        {cos(-phi), sin(-phi), 0, 0},
+        {-sin(-phi), cos(-phi), 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    };
+    matrix_t T_RtY = {
+        {cos(-theta), 0, -sin(-theta), 0},
+        {0, 1, 0, 0},
+        {sin(-theta), 0, cos(-theta), 0},
+        {0, 0, 0, 1}
+    };
+    return T_RtZ * T_RtY;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
