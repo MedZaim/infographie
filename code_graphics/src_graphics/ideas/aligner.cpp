@@ -2,9 +2,9 @@
 #include <iostream>
 #include <iomanip> // For std::setprecision
 
-using namespace std;
 
-typedef vector_t point_t;
+
+
 
 int main() {
     initwindow(1000, 800, "Align with Z axis");

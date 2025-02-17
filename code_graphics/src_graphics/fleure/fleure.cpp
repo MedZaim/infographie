@@ -19,23 +19,23 @@ void fleur(int xc = 0, int yc = 0, int r = 60,int a=60,int b=40,int nb_pital=6,
 
 
 void tree(int r = 100, double angle = PI / 3,int nb_branches=4,
-          int nb_vertical_branch = 6,int rf=10, Point racine = {50, -200}) {
+          int nb_vertical_branch = 6,int rf=10, point_2d_t racine = {50, -200}) {
 
 
     int x =(int) (r * cos(angle));
     int y = (int)(r * sin(angle));
-    Point s1 = {racine.x + x, racine.y + y};
-    Point s2 = {racine.x - x,racine.y + y};
+    point_2d_t s1 = {racine[0] + x, racine[1] + y};
+    point_2d_t s2 = {racine[0] - x,racine[1] + y};
 
     printf("x=%d y=%d\n",x,y);
-    printf("s1.x=%d s1.y=%d\n",s1.x,s1.y);
-    printf("s2.x=%d s2.y=%d\n",s2.x,s2.y);
+    printf("s1[0]=%d s1[1]=%d\n",s1[0],s1[1]);
+    printf("s2[0]=%d s2[1]=%d\n",s2[0],s2[1]);
 
    if(nb_vertical_branch>0) {
        line_bresenham(racine, s1,  GREEN,9);
        line_bresenham(racine, s2,  GREEN,9);
    }else{
-       fleur(racine.x,racine.y,rf,20,10);
+       fleur(racine[0],racine[1],rf,20,10);
        return;
    }
 

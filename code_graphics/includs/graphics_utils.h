@@ -14,6 +14,8 @@ typedef vector<point_2d_t> polygon_t;
 
 typedef vector<double> point_3d_h_t;
 
+typedef vector<point_2d_t> segment_t;
+typedef vector_t point_t;
 
 /////////////////////////////////////////////////////////////////////
 /////////////// declard functions ///////////////////////////////////
@@ -58,7 +60,7 @@ void pixel9(int x, int y, int color) {
     putpixel(x - 1, y - 1, color);
 }
 
-void pixel13(int x, int y, int color) {
+void pixeseg13(int x, int y, int color) {
     putpixel(x, y, color);
     putpixel(x + 1, y, color);
     putpixel(x, y + 1, color);
@@ -89,7 +91,7 @@ void pixel(int x, int y, int color, int lw = 1) {
             pixel9(x, y, color);
             break;
         case 13:
-            pixel13(x, y, color);
+            pixeseg13(x, y, color);
             break;
         default:
             putpixel(x, y, color);
@@ -296,32 +298,16 @@ string get_dimensions(const matrix_t &mat) {
 #define PI 3.14159265358979323846
 
 
-class Point {
-public:
-    int x, y;
+point_2d_t rotation_point(point_2d_t p, double teta = 0, point_2d_t C = {0, 0}) {
+    double x_ = (p[0] - C[0]) * cos(teta) - (p[0] - C[1]) * sin(teta) + C[0];
+    double y_ = (p[0] - C[0]) * sin(teta) + (p[0] - C[1]) * cos(teta) + C[1];
+    return {x_, y_};
+}
 
-    Point() {
-    }
 
-    Point(int x, int y) {
-        this->x = x;
-        this->y = y;
-    }
-
-    Point rotation(double teta = 0, Point C = {0, 0}) {
-        int x_ = (this->x - C.x) * cos(teta) - (this->y - C.y) * sin(teta) + C.x;
-        int y_ = (this->x - C.x) * sin(teta) + (this->y - C.y) * cos(teta) + C.y;
-        return {x_, y_};
-    }
-
-    void draw(int color, int lw = 1) {
-        pixel(x, y, color, lw);
-    }
-};
-
-Point rotation(Point p, double teta) {
-    int x_ = p.x * cos(teta) - p.y * sin(teta);
-    int y_ = p.x * sin(teta) + p.y * cos(teta);
+point_2d_t rotation(point_2d_t p, double teta) {
+    double x_ = p[0] * cos(teta) - p[1] * sin(teta);
+    double y_ = p[0] * sin(teta) + p[1] * cos(teta);
     return {x_, y_};
 }
 
@@ -343,72 +329,31 @@ double random(double min, double max) {
 
 void line_bresenham(int x1, int y1, int x2, int y2, int color = 15, int lw = 1);
 
-void line_bresenham(Point p1, Point p2, int color = 15, int lw = 1);
-
-class Line {
-public:
-    Point points[2];
-
-    Line() {
-        points[0] = {0, 0};
-        points[1] = {0, 0};
-    }
-
-    Line(Point p1, Point p2) {
-        points[0] = p1;
-        points[1] = p2;
-    }
-
-    void draw(int color = 15, int lw = 1) {
-        line_bresenham(points[0], points[1], color, lw);
-    }
-
-    Point get_medium() {
-        return {(points[0].x + points[1].x) / 2, (points[0].y + points[1].y) / 2};
-    }
-
-    Line rotation(double teta) {
-        Line l;
-        l.points[0] = points[0].rotation(teta, get_medium());
-        l.points[1] = points[1].rotation(teta, get_medium());
-        return l;
-    }
-
-    Point get_point(int i) {
-        return points[i];
-    }
-
-    double get_pente() {
-        return (points[1].y - points[0].y) / (double) (points[1].x - points[0].x);
-    }
-
-    Point get_intersection(Line l) {
-        double a1 = get_pente();
-        double a2 = l.get_pente();
-        double b1 = points[0].y - a1 * points[0].x;
-        double b2 = l.get_point(0).y - a2 * l.get_point(0).x;
-
-        if (a1 == a2) {
-            throw std::runtime_error("Lines are parallel and do not intersect.");
-        }
-
-        double x = (b2 - b1) / (a1 - a2);
-        double y = a1 * x + b1;
-        return {(int) x, (int) y};
-    }
+void line_bresenham(point_2d_t p1, point_2d_t p2, int color = 15, int lw = 1);
 
 
-    void log() {
-        std::cout << "Line {p1(" << points[0].x << ", " << points[0].y << ")--p2(" <<
-                points[1].x << ", " << points[1].y << ")" << std::endl;
-    }
-};
+void draw_seg(segment_t seg, int color = 15, int lw = 1) {
+    line_bresenham(seg[0], seg[1], color, lw);
+}
 
-Point get_intersection(Point p1, Point p2, Point p3, Point p4) {
-    double a1 = (p2.y - p1.y) / (double) (p2.x - p1.x);
-    double a2 = (p4.y - p3.y) / (double) (p4.x - p3.x);
-    double b1 = p1.y - a1 * p1.x;
-    double b2 = p3.y - a2 * p3.x;
+point_2d_t get_medium(segment_t seg) {
+    return {(seg[0][0] + seg[1][0]) / 2, (seg[0][1] + seg[1][1]) / 2};
+}
+
+segment_t rotation_seg(segment_t seg, double teta) {
+    return {rotation_point(seg[0], teta, get_medium(seg)), rotation_point(seg[1], teta, get_medium(seg))};
+}
+
+
+double get_pente(segment_t seg) {
+    return (seg[1][1] - seg[0][1]) / (double) (seg[1][0] - seg[0][0]);
+}
+
+point_2d_t get_intersection(segment_t seg1, segment_t seg2) {
+    double a1 = get_pente(seg1);
+    double a2 = get_pente(seg2);
+    double b1 = seg1[0][1] - a1 * seg1[0][0];
+    double b2 = seg2[0][1] - a2 * seg2[0][0];
 
     if (a1 == a2) {
         throw std::runtime_error("Lines are parallel and do not intersect.");
@@ -416,16 +361,38 @@ Point get_intersection(Point p1, Point p2, Point p3, Point p4) {
 
     double x = (b2 - b1) / (a1 - a2);
     double y = a1 * x + b1;
-    return {(int) x, (int) y};
+    return {x, y};
 }
 
-Line ajuster(Line l1, Line l2) {
-    Point p = l1.get_intersection(l2);
-    return {l2.get_point(0), p};
+
+void log(segment_t seg) {
+    std::cout << "segment {p1(" << seg[0][0] << ", " << seg[0][1] << "), p2("
+            << seg[1][0] << ", " << seg[1][1] << ")}" << std::endl;
+}
+
+
+point_2d_t get_intersection(point_2d_t p1, point_2d_t p2, point_2d_t p3, point_2d_t p4) {
+    double a1 = (p2[1] - p1[1]) / (double) (p2[0] - p1[0]);
+    double a2 = (p4[1] - p3[1]) / (double) (p4[0] - p3[0]);
+    double b1 = p1[1] - a1 * p1[0];
+    double b2 = p3[1] - a2 * p3[0];
+
+    if (a1 == a2) {
+        throw std::runtime_error("Lines are parallel and do not intersect.");
+    }
+
+    double x = (b2 - b1) / (a1 - a2);
+    double y = a1 * x + b1;
+    return {x, y};
+}
+
+segment_t ajuster(segment_t seg1, segment_t seg2) {
+    point_2d_t p = get_intersection(seg1, seg2);
+    return {seg2[0], p};
 }
 
 // Function to draw a line using mouse input
-Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
+segment_t ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
     int x1, y1, x2, y2;
 
     // Wait for the first mouse click (left button)
@@ -461,7 +428,7 @@ Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
     // Draw the final line in the specified color and width
     line_bresenham(x1, y1, x2, y2, color, lw);
 
-    return {Point(x1, y1), Point(x2, y2)};
+    return {point_2d_t(x1, y1), point_2d_t(x2, y2)};
 }
 
 //  BRESENHAM ALGORITHMS
@@ -512,17 +479,11 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
 }
 
 
-/*void line_bresenham(double x1, double y1, double x2, double y2, int color, int lw) {
-    line_bresenham((int) x1, (int) y1, (int) x2, (int) y2, color, lw);
-}*/
 
-inline void line_bresenham(Point p1, Point p2, int color, int lw) {
-    line_bresenham(p1.x, p1.y, p2.x, p2.y, color, lw);
+ void line_bresenham(point_2d_t p1, point_2d_t p2, int color, int lw) {
+    line_bresenham(p1[0], p1[1], p2[0], p2[1], color, lw);
 }
 
-inline void line_bresenham(point_2d_t p1, point_2d_t p2, int color, int lw) {
-    line_bresenham((int) p1[0], (int) p1[1], (int) p2[0], (int) p2[1], color, lw);
-}
 
 // Bresenham's circle algorithm
 
@@ -639,8 +600,8 @@ void line_polynomial(int xd, int yd, int xf, int yf, int color, int lw = 1) {
     }
 }
 
-void line_polynomial(Point p1, Point p2, int color, int lw = 1) {
-    line_polynomial(p1.x, p1.y, p2.x, p2.y, color, lw);
+void line_polynomial(point_2d_t p1, point_2d_t p2, int color, int lw = 1) {
+    line_polynomial(p1[0], p1[1], p2[0], p2[1], color, lw);
 }
 
 //polynomial circle algorithm
@@ -708,20 +669,20 @@ void rectangle_(int x1, int y1, int x2, int y2, int color = 15, int lw = 1) {
     line_bresenham(x1, y2, x2, y2, color, lw);
 }
 
-void rectangle_(Point p1, Point p2, int color = 15, int lw = 1) {
-    rectangle_(p1.x, p1.y, p2.x, p2.y, color, lw);
+void rectangle_(point_2d_t p1, point_2d_t p2, int color = 15, int lw = 1) {
+    rectangle_(p1[0], p1[1], p2[0], p2[1], color, lw);
 }
 
-void rectangle_teta(Point p1, Point p2, double teta = 0, int color = 15, int lw = 1) {
-    Point center = {(p1.x + p2.x) / 2, (p1.y + p2.y) / 2};
+void rectangle_teta(point_2d_t p1, point_2d_t p2, double teta = 0, int color = 15, int lw = 1) {
+    point_2d_t center = {(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2};
 
-    Point p11 = {p1.x, p2.y};
-    Point p22 = {p2.x, p1.y};
+    point_2d_t p11 = {p1[0], p2[1]};
+    point_2d_t p22 = {p2[0], p1[1]};
 
-    Point p1_ = p1.rotation(teta, center);
-    Point p2_ = p2.rotation(teta, center);
-    Point p11_ = p11.rotation(teta, center);
-    Point p22_ = p22.rotation(teta, center);
+    point_2d_t p1_ = rotation_point(p1,teta, center);
+    point_2d_t p2_ = rotation_point(p2,teta, center);
+    point_2d_t p11_ = rotation_point(p11, teta, center);
+    point_2d_t p22_ = rotation_point(p22,teta, center);
     line_bresenham(p1_, p22_, color, lw);
     line_bresenham(p1_, p11_, color, lw);
     line_bresenham(p2_, p11_, color, lw);
@@ -751,33 +712,33 @@ void rectangle_by_mouse_click(int color = 15, int color_bk = 0, int lw = 1) {
 }
 
 void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 1) {
-    Point p1, p2, p3, center;
+    point_2d_t p1, p2, p3, center;
 
     double teta = 0;
     clearmouseclick(WM_LBUTTONDOWN);
     while (!ismouseclick(WM_LBUTTONDOWN)) {
     }
-    p1.x = mousex() - getmaxx() / 2;
-    p1.y = getmaxy() / 2 - mousey();
+    p1[0] = mousex() - getmaxx() / 2;
+    p1[1] = getmaxy() / 2 - mousey();
 
 
     while (true) {
-        rectangle_(p1.x, p1.y, p2.x, p2.y, color_bk, lw);
-        p2.x = mousex() - getmaxx() / 2;
-        p2.y = getmaxy() / 2 - mousey();
+        rectangle_(p1[0], p1[1], p2[0], p2[1], color_bk, lw);
+        p2[0] = mousex() - getmaxx() / 2;
+        p2[1] = getmaxy() / 2 - mousey();
 
-        rectangle_(p1.x, p1.y, p2.x, p2.y, color, lw);
+        rectangle_(p1[0], p1[1], p2[0], p2[1], color, lw);
         if (ismouseclick(WM_LBUTTONUP)) {
             break;
         }
     }
-    center = {(p1.x + p2.x) / 2, (p1.y + p2.y) / 2};
+    center = {(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2};
     clearmouseclick(WM_LBUTTONDOWN);
     clearmouseclick(WM_LBUTTONUP);
     while (true) {
         rectangle_teta(p1, p2, teta, color_bk, lw);
-        p3.y = getmaxy() / 2 - mousey();
-        teta = (double) 2 * PI * ((p3.y - (float) p2.y) / (float) getmaxy());
+        p3[1] = getmaxy() / 2 - mousey();
+        teta = (double) 2 * PI * ((p3[1] - (float) p2[1]) / (float) getmaxy());
 
         rectangle_teta(p1, p2, teta, color, lw);
 
@@ -788,50 +749,48 @@ void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 
 }
 
 void ellipse_teta(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15) {
-    int x;
-    int y;
-    Point p;
+    double x,y;
+    point_2d_t p;
     for (double i = 0; i < 2 * PI; i = i + 0.03) {
         x = a * cos(i * PI);
         y = b * sin(i * PI);
 
         p = rotation({x, y}, teta);
-        pixel(p.x + xc, p.y + yc, color);
+        pixel(p[0] + xc, p[1] + yc, color);
     }
 }
 
-void elipse_p_p(Point p1, Point p2, double teta = 0, int color = 15, int lw = 1) {
-    int x;
-    int y;
-    // printf(" __>elipse_p_p called with ::x1=%d y1=%d x2=%d y2=%d ____teta=%f\n", p1.x, p1.y, p2.x, p2.y, teta);
-    int xc = (p1.x + p2.x) / 2;
-    int yc = (p1.y + p2.y) / 2;
-    Point p;
-    int a = abs(p1.x - p2.x) / 2;
-    int b = abs(p1.y - p2.y) / 2;
+void elipse_p_p(point_2d_t p1, point_2d_t p2, double teta = 0, int color = 15, int lw = 1) {
+    double x,y;
+    // printf(" __>elipse_p_p called with ::x1=%d y1=%d x2=%d y2=%d ____teta=%f\n", p1[0], p1[1], p2[0], p2[1], teta);
+    int xc = (p1[0] + p2[0]) / 2;
+    int yc = (p1[1] + p2[1]) / 2;
+    point_2d_t p;
+    int a = abs(p1[0] - p2[0]) / 2;
+    int b = abs(p1[1] - p2[1]) / 2;
     for (double i = 0; i < 2 * PI; i = i + 0.03) {
         x = a * cos(i * PI);
         y = b * sin(i * PI);
 
         p = rotation({x, y}, teta);
         // p = {x, y};
-        pixel(p.x + xc, p.y + yc, color, lw);
+        pixel(p[0] + xc, p[1] + yc, color, lw);
     }
 }
 
 void ellipse_p_p_by_mouse(double teta = 0, int color = 15, int color_bk = 0, int lw = 9) {
-    Point p1, p2, p3;
+    point_2d_t p1, p2, p3;
     clearmouseclick(WM_LBUTTONDOWN);
     while (!ismouseclick(WM_LBUTTONDOWN)) {
     }
-    p1.x = mousex() - getmaxx() / 2;
-    p1.y = getmaxy() / 2 - mousey();
+    p1[0] = mousex() - getmaxx() / 2;
+    p1[1] = getmaxy() / 2 - mousey();
 
 
     while (true) {
         elipse_p_p(p1, p2, teta, color_bk, lw);
-        p2.x = mousex() - getmaxx() / 2;
-        p2.y = getmaxy() / 2 - mousey();
+        p2[0] = mousex() - getmaxx() / 2;
+        p2[1] = getmaxy() / 2 - mousey();
 
         elipse_p_p(p1, p2, teta, color, lw);
         if (ismouseclick(WM_LBUTTONUP)) {
@@ -843,9 +802,9 @@ void ellipse_p_p_by_mouse(double teta = 0, int color = 15, int color_bk = 0, int
     while (true) {
         elipse_p_p(p1, p2, teta, color_bk, lw);
 
-        p3.y = getmaxy() / 2 - mousey();
+        p3[1] = getmaxy() / 2 - mousey();
 
-        teta = (double) 2 * PI * ((p3.y - (float) p2.y) / (float) getmaxy());
+        teta = (double) 2 * PI * ((p3[1] - (float) p2[1]) / (float) getmaxy());
 
         elipse_p_p(p1, p2, teta, color, lw);
 
@@ -865,16 +824,16 @@ void ellipse_teta_full(int a, int b, int xc = 0, int yc = 0, double teta = 0, in
 }
 
 void ellipse_full_by_ligne(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15, int lw = 1) {
-    int y;
-    int x1, y1, x2, y2;
+    double y;
+    double x1, y1, x2, y2;
 
-    for (int x = -a; x <= a; x++) {
+    for (double x = -a; x <= a; x++) {
         y = (int) (b * sqrt(1 - (x * x / (float) (a * a))));
 
-        Point p1 = rotation({x, y}, teta);
-        Point p2 = rotation({x, -y}, teta);
+        point_2d_t p1 = rotation({x, y}, teta);
+        point_2d_t p2 = rotation({x, -y}, teta);
 
-        line_bresenham(p1.x + xc, p1.y + yc, p2.x + xc, p2.y + yc, color, lw);
+        line_bresenham(p1[0] + xc, p1[1] + yc, p2[0] + xc, p2[1] + yc, color, lw);
     }
 }
 
@@ -1091,7 +1050,7 @@ vector_t find_intersection(const vector_t p1, const vector_t p2,const vector_t p
     return intr_point;
 }
 /*  Point p = get_intersection(Point(p1[0], p1[1]), Point(p2[0], p2[1]), Point(p3[0], p3[1]), Point(p4[0], p4[1]){
-    vector_t intr_point(2)={p.x, p.y};
+    vector_t intr_point(2)={p[0], p[1]};
     return intr_point;
 }*/
 /*

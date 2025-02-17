@@ -52,11 +52,11 @@ public:
             int p1 = edges[i][0], p2 = edges[i][1];
 
             // Points 3D
-            int x1 = points[p1].x, y1 = points[p1].y, z1 = points[p1].z;
-            int x2 = points[p2].x, y2 = points[p2].y, z2 = points[p2].z;
+            double x1 = points[p1].x, y1 = points[p1].y, z1 = points[p1].z;
+            double x2 = points[p2].x, y2 = points[p2].y, z2 = points[p2].z;
 
-            Point A={x1,y1};
-            Point B={x2,y2};
+            point_2d_t A={x1,y1};
+            point_2d_t B={x2,y2};
             line_bresenham(A,B,14);
 
         }
