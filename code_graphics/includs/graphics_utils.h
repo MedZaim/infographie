@@ -9,6 +9,12 @@ using namespace std;
 typedef vector<vector<double> > matrix_t;
 typedef vector<double> vector_t;
 
+typedef vector<double> point_2d_t;
+typedef vector<point_2d_t> polygon_t;
+
+typedef vector<double> point_3d_h_t;
+
+
 /////////////////////////////////////////////////////////////////////
 /////////////// declard functions ///////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -140,7 +146,7 @@ const matrix_t Tcv = {
 const matrix_t Tcb = {
     {1.0, 0.0, 0.0, 0.0},
     {0.0, 1.0, 0.0, 0.0},
-    {sqrt(3) / 4, 1.0 / 4, 0.0, 0.0},
+    {sqrt(2) / 4, sqrt(2) / 4, 0.0, 0.0},
     {0.0, 0.0, 0.0, 1.0}
 };
 
@@ -417,6 +423,7 @@ Line ajuster(Line l1, Line l2) {
     Point p = l1.get_intersection(l2);
     return {l2.get_point(0), p};
 }
+
 // Function to draw a line using mouse input
 Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
     int x1, y1, x2, y2;
@@ -456,13 +463,18 @@ Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
 
     return {Point(x1, y1), Point(x2, y2)};
 }
+
 //  BRESENHAM ALGORITHMS
 
 
 // Bresenham's line algorithm
 void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
-    // printf("__> line_bresenham called with :: x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
-
+    //  printf("__> line_bresenham called with :: x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
+    if (x1 == x2 && y1 == y2) {
+        pixel(x1, y1, color, lw);
+        printf("line_bresenham :///!!\\\\ p1==p2\n");
+        return;
+    }
     int dx = abs(x2 - x1);
     int dy = abs(y2 - y1);
     int px = (x2 > x1) ? 1 : -1;
@@ -504,8 +516,12 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
     line_bresenham((int) x1, (int) y1, (int) x2, (int) y2, color, lw);
 }*/
 
-void line_bresenham(Point p1, Point p2, int color, int lw) {
+inline void line_bresenham(Point p1, Point p2, int color, int lw) {
     line_bresenham(p1.x, p1.y, p2.x, p2.y, color, lw);
+}
+
+inline void line_bresenham(point_2d_t p1, point_2d_t p2, int color, int lw) {
+    line_bresenham((int) p1[0], (int) p1[1], (int) p2[0], (int) p2[1], color, lw);
 }
 
 // Bresenham's circle algorithm
@@ -909,12 +925,12 @@ matrix_t rotation_z(matrix_t cube, double angle) {
     return cube * mat_rot_z;
 }
 
-matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
+matrix_t scaling(matrix_t cube, double sx, double sy, double sz, double sw = 1) {
     matrix_t mat_scale = {
         {sx, 0, 0, 0},
         {0, sy, 0, 0},
         {0, 0, sz, 0},
-        {0, 0, 0, 1}
+        {0, 0, 0, sw}
     };
     return cube * mat_scale;
 }
@@ -947,13 +963,13 @@ matrix_t get_perspective_matrix_Z_d(double d) {
     matrix_t T_perspective = {
         {1, 0, 0, 0},
         {0, 1, 0, 0},
-        {0, 0, 1, 1.0 / d},
-        {0, 0, 0, 0}
+        {0, 0, 0, 1.0 / d},
+        {0, 0, 0, 1}
     };
     return T_perspective;
 }
 
-matrix_t get_perspective_calculated_matrix(vector_t viewpoint, vector_t r0, vector_t n) {
+matrix_t get_perspective_calculated_matrix(point_3d_h_t viewpoint, point_3d_h_t r0, vector_t n) {
     double a = viewpoint[0];
     double b = viewpoint[1];
     double c = viewpoint[2];
@@ -991,14 +1007,6 @@ matrix_t get_perspective_calculated_matrix(vector_t viewpoint, vector_t r0, vect
     return mat_translation_to_center * mat_perspective * mat_translation_invers;
 };
 
-matrix_t get_perspective_calculated_matrix(double a, double b, double c, double x0, double y0, double z0, double n1,
-                                           double n2,
-                                           double n3) {
-    vector_t viewpoint = {a, b, c};
-    vector_t r0 = {x0, y0, z0};
-    vector_t n = {n1, n2, n3};
-    return get_perspective_calculated_matrix(viewpoint, r0, n);
-}
 
 matrix_t divid_on_w(matrix_t points) {
     matrix_t res = points;
@@ -1015,23 +1023,8 @@ matrix_t cavalier(matrix_t points) {
     return result;
 }
 
-void centre3D(int *X, int *Y, int *Z) {
-    int centreX = getmaxx() / 2;
-    int centreY = getmaxy() / 2;
-    int length = 350;
-
-    // Ajuster les coordonnées X et Y pour centrer le cube
-    *X = *X + centreX;
-    *Y = centreY - *Y;
-
-    // Calculer la perspective en utilisant le Z
-    double facteur = (double) length / (length + *Z); // Facteur de perspective
-    *X = (int) (*X * facteur);
-    *Y = (int) (*Y * facteur);
-}
 
 matrix_t get_cavalier_matrix(double angle) {
-    double angle_rad = angle * PI / 180;
     return Tcv;
 }
 
