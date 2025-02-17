@@ -1,11 +1,9 @@
 //
 // Created by lenovo on 02/11/2024.
 
-//#include "./../../includs/graphics_utils.h"
-#include "../../includs/chapes.h"
-//#include <cmath>
-#include <iostream>
-#include <ctime>
+#include "./../../includs/graphics_utils.h"
+
+
 
 
 void Dessine_Cadran_Horloge(int radius, int xc, int yc) {
@@ -32,8 +30,8 @@ std::time_t getCurrentTime() {
 void clock_(int xc = 0, int yc = 0, int r = 200, int color = 15, int color_h_h = GREEN, int color_h_m = YELLOW,
             int color_h_s = RED, int bk_color = 0) {
     int h = 0, m = 0, s = 0, xh = 0, yh = 0, xm = 0, ym = 0, xs = 0, ys = 0, xh_ = 0, yh_ = 0, xm_ = 0, ym_ = 0, xs_ = 0, ys_ = 0;
-    bresenham_full_cercle(xc, yc, r + 55, r + 40, color);
-    bresenham_full_cercle(xc, yc, r + 36, r+5 , 14);
+    cercle_full_bresenham(xc, yc, r + 55, r + 40, color);
+    cercle_full_bresenham(xc, yc, r + 36, r+5 , 14);
     int rs = r - .2 * r;
     int rm = r - .3 * r;
     int rh = r - .5 * r;

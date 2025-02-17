@@ -6,7 +6,7 @@
 #include <chrono>
 
 
-void pendule(long long int t0,Point C,int r=100,double f= 1/4.0,double a= 0.08, double teta_m =PI/3){
+void pendule(int t0,Point C,int r=100,double f= 1/4.0,double a= 0.08, double teta_m =PI/3){
     line_bresenham({C.x-15,C.y},{C.x+15,C.y},15,9);
     int x,y,x_,y_;
     double teta;

@@ -1,10 +1,8 @@
 //
 // Created by lenovo on 06/11/2024.
 //
-//#include "./../../includs/graphics_utils.h"
-#include "../../includs/chapes.h"
+#include "./../../includs/graphics_utils.h"
 #include <conio.h>
-#include <iostream>
 
 // Initialize grid parameters
 int gridSize = 20;    // Initial grid size
@@ -64,9 +62,7 @@ void zoomable_grid() {
 
 
 int main() {
-    // Initialize graphics mode
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, "");
+initwindow(600, 400, "Zoomable Grid");
     zoomable_grid();
     printf("random=%d\n", random(1, 10));
 

@@ -1,10 +1,8 @@
 //
 // Created by lenovo on 10/11/2024.
 //
-#include "../../includs/chapes.h"
+#include "../../includs/graphics_utils.h"
 
-#ifndef INFOGRAPHIE_POLYGON_H
-#define INFOGRAPHIE_POLYGON_H
 
 
 class Polygon_ {
@@ -43,4 +41,4 @@ public:
 };
 
 
-#endif //INFOGRAPHIE_POLYGON_H
+

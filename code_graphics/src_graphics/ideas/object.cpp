@@ -3,10 +3,7 @@
 //
 
 //
-#include <graphics.h>
-#include <cmath>
-#include <vector>
-#include <iostream>
+
 
 #include "../../includs/graphics_utils.h"
 
@@ -14,7 +11,6 @@
 class Point_3d {
 public:
     double x, y, z;
-ajus
     Point_3d() : x(0), y(0), z(0) {}
     Point_3d(double x, double y, double z) : x(x), y(y), z(z) {}
 

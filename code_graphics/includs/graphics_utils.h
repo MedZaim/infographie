@@ -6,7 +6,7 @@
 
 
 using namespace std;
-typedef vector<vector<double>> matrix_t;
+typedef vector<vector<double> > matrix_t;
 typedef vector<double> vector_t;
 
 /////////////////////////////////////////////////////////////////////
@@ -115,7 +115,6 @@ void Tracer_cube(matrix_t resRot, int color = WHITE, int lw = 1) {
         char label[3] = {(char) ('A' + i), '\0'}; // Nommer les sommets A, B, C...
         outtextxy(x, y, label);
     }
-
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -130,21 +129,23 @@ string get_dimensions(const matrix_t &mat);
 /////////////////////////////  MATRIX UTILS  /////////////////////////////////////////
 
 
-
 // Transformation matrices
-const matrix_t Tcv = {{1.0,         0.0,         0.0, 0.0},
-                      {0.0,         1.0,         0.0, 0.0},
-                      {sqrt(2) / 2, sqrt(2) / 2, 0.0, 0.0},
-                      {0.0,         0.0,         0.0, 1.0}};
+const matrix_t Tcv = {
+    {1.0, 0.0, 0.0, 0.0},
+    {0.0, 1.0, 0.0, 0.0},
+    {sqrt(2) / 2, sqrt(2) / 2, 0.0, 0.0},
+    {0.0, 0.0, 0.0, 1.0}
+};
 
-const matrix_t Tcb = {{1.0,         0.0,     0.0, 0.0},
-                      {0.0,         1.0,     0.0, 0.0},
-                      {sqrt(3) / 4, 1.0 / 4, 0.0, 0.0},
-                      {0.0,         0.0,     0.0, 1.0}};
+const matrix_t Tcb = {
+    {1.0, 0.0, 0.0, 0.0},
+    {0.0, 1.0, 0.0, 0.0},
+    {sqrt(3) / 4, 1.0 / 4, 0.0, 0.0},
+    {0.0, 0.0, 0.0, 1.0}
+};
 
 // Polyhedre class
 class Polyhedre {
-
 public:
     matrix_t sommets;
     matrix_t aretes;
@@ -278,12 +279,9 @@ string get_dimensions(const matrix_t &mat) {
 }
 
 
-
-
 //////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////  chapes  ///////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-
 
 
 #include "random"
@@ -296,7 +294,8 @@ class Point {
 public:
     int x, y;
 
-    Point() {}
+    Point() {
+    }
 
     Point(int x, int y) {
         this->x = x;
@@ -395,8 +394,7 @@ public:
 
     void log() {
         std::cout << "Line {p1(" << points[0].x << ", " << points[0].y << ")--p2(" <<
-                  points[1].x << ", " << points[1].y << ")" << std::endl;
-
+                points[1].x << ", " << points[1].y << ")" << std::endl;
     }
 };
 
@@ -418,34 +416,44 @@ Point get_intersection(Point p1, Point p2, Point p3, Point p4) {
 Line ajuster(Line l1, Line l2) {
     Point p = l1.get_intersection(l2);
     return {l2.get_point(0), p};
-
 }
-
+// Function to draw a line using mouse input
 Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
     int x1, y1, x2, y2;
-    while (true) {
 
-        while (!ismouseclick(WM_LBUTTONDOWN)) {}
-        x1 = mousex() - getmaxx() / 2;
-        y1 = getmaxy() / 2 - mousey();
-        clearmouseclick(WM_LBUTTONDOWN);
+    // Wait for the first mouse click (left button)
+    clearmouseclick(WM_LBUTTONDOWN);
+    while (!ismouseclick(WM_LBUTTONDOWN)) {
+        delay(10); // Avoid busy-waiting
+    }
+    x1 = mousex() - getmaxx() / 2;
+    y1 = getmaxy() / 2 - mousey();
+    clearmouseclick(WM_LBUTTONDOWN);
 
-        while (!ismouseclick(WM_LBUTTONDOWN)) {
-            clearmouseclick(WM_LBUTTONDOWN);
-            x2 = mousex() - getmaxx() / 2;
-            y2 = getmaxy() / 2 - mousey();
-            line_bresenham(x1, y1, x2, y2, color, 1);
-            line_bresenham(x1, y1, x2, y2, color_bk, 1);
-            if (ismouseclick(WM_RBUTTONDOWN)) {
-                goto out;
-            }
+    // Draw the line dynamically while moving the mouse
+    bool drawing = true;
+    while (drawing) {
+        // Get the current mouse position
+        x2 = mousex() - getmaxx() / 2;
+        y2 = getmaxy() / 2 - mousey();
 
+        // Draw the line in the current color
+        line_bresenham(x1, y1, x2, y2, color, lw);
+
+        // Check for right-click to finish drawing
+        if (ismouseclick(WM_RBUTTONDOWN)) {
+            drawing = false;
+            clearmouseclick(WM_RBUTTONDOWN);
+        } else {
+            // Erase the previous line by drawing it in the background color
+            delay(10); // Small delay to reduce flickering
+            line_bresenham(x1, y1, x2, y2, color_bk, lw);
         }
     }
-    out:
-    //line_bresenham(x1, y1, x2, y2, color, lw);
-    clearmouseclick(WM_LBUTTONDOWN);
-    clearmouseclick(WM_RBUTTONDOWN);
+
+    // Draw the final line in the specified color and width
+    line_bresenham(x1, y1, x2, y2, color, lw);
+
     return {Point(x1, y1), Point(x2, y2)};
 }
 //  BRESENHAM ALGORITHMS
@@ -453,7 +461,7 @@ Line ligne_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
 
 // Bresenham's line algorithm
 void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
-    printf("__> line_bresenham called with :: x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
+    // printf("__> line_bresenham called with :: x1=%d y1=%d x2=%d y2=%d color=%d lw=%d \n", x1, y1, x2, y2, color, lw);
 
     int dx = abs(x2 - x1);
     int dy = abs(y2 - y1);
@@ -464,7 +472,8 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
     pixel(x, y, color, lw); // Ensure first pixel is drawn
 
     long s;
-    if (dx > dy) {  // Case: horizontal-ish line
+    if (dx > dy) {
+        // Case: horizontal-ish line
         s = 2 * dy - dx;
         do {
             x += px;
@@ -475,7 +484,8 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
             s += 2 * dy;
             pixel(x, y, color, lw);
         } while (x != x2);
-    } else {  // Case: vertical-ish line
+    } else {
+        // Case: vertical-ish line
         s = 2 * dx - dy;
         do {
             y += py;
@@ -497,17 +507,17 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
 void line_bresenham(Point p1, Point p2, int color, int lw) {
     line_bresenham(p1.x, p1.y, p2.x, p2.y, color, lw);
 }
+
 // Bresenham's circle algorithm
 
 
-void cercle_bresenham(int xc, int yc, int r, int color, int wl = 13) {
+void cercle_bresenham(int xc, int yc, int r, int color, int wl = 1) {
     int x = 0;
     int y = r;
     int s = 3 - 2 * r;
 
 
     for (int i = 1; x <= y; i++) {
-
         pixel(x + xc, y + yc, color, wl); // Draw pixel5 at (x, y)
         pixel(-x + xc, y + yc, color, wl);
         pixel(x + xc, -y + yc, color, wl);
@@ -525,7 +535,6 @@ void cercle_bresenham(int xc, int yc, int r, int color, int wl = 13) {
             s += 4 * x + 6;
             x += 1;
         }
-
     }
 }
 
@@ -533,7 +542,6 @@ void cercle_bresenham(int xc, int yc, int r, int color, int wl = 13) {
 void cercle_full_bresenham(int xc, int yc, int r2, int r1 = 0, int color = 15, int lw = 13) {
     for (int i = r1; i <= r2; i += 1) {
         cercle_bresenham(xc, yc, i, color, lw);
-
     }
 }
 
@@ -542,12 +550,13 @@ void cercle_full_bresenham(int xc, int yc, int r2, int r1 = 0, int color = 15, i
 
 void ellipse_bresenham(int a, int b, int xc = 0, int yc = 0, int color = 15) {
     int x = 0, y = b;
-    int s1 = 2 * b * b - 2 * a * a * b + a * a;  // Initial decision parameter for Region 1
+    int s1 = 2 * b * b - 2 * a * a * b + a * a; // Initial decision parameter for Region 1
     int s2;
 
 
     while (y > 0 && x < a) {
-        if (a * a * (y) > b * b * (x)) {// First Region
+        if (a * a * (y) > b * b * (x)) {
+            // First Region
             std::cout << "// Region I" << std::endl;
             pixel(x + xc, y + yc, color);
             pixel(-x + xc, y + yc, color);
@@ -558,7 +567,6 @@ void ellipse_bresenham(int a, int b, int xc = 0, int yc = 0, int color = 15) {
                 s1 += b * b * (4 * x + 6) + a * a * (-4 * y + 4);
                 x++;
                 y--;
-
             } else {
                 s1 += b * b * (4 * x + 6);
                 x++;
@@ -582,7 +590,6 @@ void ellipse_bresenham(int a, int b, int xc = 0, int yc = 0, int color = 15) {
                 }
             }
         }
-
     }
 }
 
@@ -601,14 +608,14 @@ void line_polynomial(int xd, int yd, int xf, int yf, int color, int lw = 1) {
     // Use float for accurate line drawing
     if (abs(dx) >= abs(dy)) {
         float a = (float) dy / dx; // Slope
-        float b = yd - xd * a;    // Intercept
+        float b = yd - xd * a; // Intercept
         for (int x = xd + px; x != xf; x += px) {
             int y = a * x + b;
             pixel(x, y, color, lw);
         }
     } else {
         float a = (float) dx / dy; // Slope for steep lines
-        float b = xd - yd * a;    // Intercept
+        float b = xd - yd * a; // Intercept
         for (int y = yd + py; y != yf; y += py) {
             int x = a * y + b;
             pixel(x, y, color, lw);
@@ -619,6 +626,7 @@ void line_polynomial(int xd, int yd, int xf, int yf, int color, int lw = 1) {
 void line_polynomial(Point p1, Point p2, int color, int lw = 1) {
     line_polynomial(p1.x, p1.y, p2.x, p2.y, color, lw);
 }
+
 //polynomial circle algorithm
 
 
@@ -635,7 +643,6 @@ void cercle_polynomial(int xc, int yc, int r, int color) {
 }
 
 //polynomial ellipse algorithm
-
 
 
 void ellipse_polynomial(int a, int b, int xc, int yc, int color) {
@@ -671,7 +678,6 @@ void ellipse_trigonometrique(int a, int b, int xc, int yc, int color) {
         x = a * cos(i * PI);
         y = b * sin(i * PI);
         pixel(x + xc, y + yc, color);
-
     }
 }
 
@@ -691,7 +697,6 @@ void rectangle_(Point p1, Point p2, int color = 15, int lw = 1) {
 }
 
 void rectangle_teta(Point p1, Point p2, double teta = 0, int color = 15, int lw = 1) {
-
     Point center = {(p1.x + p2.x) / 2, (p1.y + p2.y) / 2};
 
     Point p11 = {p1.x, p2.y};
@@ -711,7 +716,8 @@ void rectangle_teta(Point p1, Point p2, double teta = 0, int color = 15, int lw 
 void rectangle_by_mouse_click(int color = 15, int color_bk = 0, int lw = 1) {
     int x1, y1, x2, y2;
     clearmouseclick(WM_LBUTTONDOWN);
-    while (!ismouseclick(WM_LBUTTONDOWN)) {}
+    while (!ismouseclick(WM_LBUTTONDOWN)) {
+    }
     x1 = mousex() - getmaxx() / 2;
     y1 = getmaxy() / 2 - mousey();
 
@@ -729,12 +735,12 @@ void rectangle_by_mouse_click(int color = 15, int color_bk = 0, int lw = 1) {
 }
 
 void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 1) {
-
     Point p1, p2, p3, center;
 
     double teta = 0;
     clearmouseclick(WM_LBUTTONDOWN);
-    while (!ismouseclick(WM_LBUTTONDOWN)) {}
+    while (!ismouseclick(WM_LBUTTONDOWN)) {
+    }
     p1.x = mousex() - getmaxx() / 2;
     p1.y = getmaxy() / 2 - mousey();
 
@@ -753,7 +759,6 @@ void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 
     clearmouseclick(WM_LBUTTONDOWN);
     clearmouseclick(WM_LBUTTONUP);
     while (true) {
-
         rectangle_teta(p1, p2, teta, color_bk, lw);
         p3.y = getmaxy() / 2 - mousey();
         teta = (double) 2 * PI * ((p3.y - (float) p2.y) / (float) getmaxy());
@@ -763,7 +768,6 @@ void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 
         if (ismouseclick(WM_LBUTTONDOWN)) {
             break;
         }
-
     }
 }
 
@@ -778,7 +782,6 @@ void ellipse_teta(int a, int b, int xc = 0, int yc = 0, double teta = 0, int col
         p = rotation({x, y}, teta);
         pixel(p.x + xc, p.y + yc, color);
     }
-
 }
 
 void elipse_p_p(Point p1, Point p2, double teta = 0, int color = 15, int lw = 1) {
@@ -803,7 +806,8 @@ void elipse_p_p(Point p1, Point p2, double teta = 0, int color = 15, int lw = 1)
 void ellipse_p_p_by_mouse(double teta = 0, int color = 15, int color_bk = 0, int lw = 9) {
     Point p1, p2, p3;
     clearmouseclick(WM_LBUTTONDOWN);
-    while (!ismouseclick(WM_LBUTTONDOWN)) {}
+    while (!ismouseclick(WM_LBUTTONDOWN)) {
+    }
     p1.x = mousex() - getmaxx() / 2;
     p1.y = getmaxy() / 2 - mousey();
 
@@ -833,13 +837,9 @@ void ellipse_p_p_by_mouse(double teta = 0, int color = 15, int color_bk = 0, int
             break;
         }
     }
-
-
 }
 
 void ellipse_p_p_teta_by_mouse(int color = 15, int color_bk = 0, int lw = 1) {
-
-
 }
 
 void ellipse_teta_full(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15) {
@@ -860,7 +860,6 @@ void ellipse_full_by_ligne(int a, int b, int xc = 0, int yc = 0, double teta = 0
 
         line_bresenham(p1.x + xc, p1.y + yc, p2.x + xc, p2.y + yc, color, lw);
     }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -881,44 +880,41 @@ void print_matrix(const matrix_t matrix) {
 }
 
 matrix_t rotation_x(matrix_t cube, double angle) {
-
     matrix_t mat_rot_X = {
-            {1, 0,           0,          0},
-            {0, cos(angle),  sin(angle), 0},
-            {0, -sin(angle), cos(angle), 0},
-            {0, 0,           0,          1}
+        {1, 0, 0, 0},
+        {0, cos(angle), sin(angle), 0},
+        {0, -sin(angle), cos(angle), 0},
+        {0, 0, 0, 1}
     };
     return cube * mat_rot_X;
 }
 
 matrix_t rotation_y(matrix_t cube, double angle) {
-
     matrix_t mat_rot_y = {
-            {cos(angle), 0, -sin(angle), 0},
-            {0,          1, 0,           0},
-            {sin(angle), 0, cos(angle),  0},
-            {0,          0, 0,           1}
+        {cos(angle), 0, -sin(angle), 0},
+        {0, 1, 0, 0},
+        {sin(angle), 0, cos(angle), 0},
+        {0, 0, 0, 1}
     };
-    return  cube*mat_rot_y;
+    return cube * mat_rot_y;
 }
 
 matrix_t rotation_z(matrix_t cube, double angle) {
-
     matrix_t mat_rot_z = {
-            {cos(angle),  sin(angle), 0, 0},
-            {-sin(angle), cos(angle), 0, 0},
-            {0,           0,          1, 0},
-            {0,           0,          0, 1}
+        {cos(angle), sin(angle), 0, 0},
+        {-sin(angle), cos(angle), 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
     };
-    return  cube * mat_rot_z;
+    return cube * mat_rot_z;
 }
 
 matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
     matrix_t mat_scale = {
-            {sx, 0,  0,  0},
-            {0,  sy, 0,  0},
-            {0,  0,  sz, 0},
-            {0,  0,  0,  1}
+        {sx, 0, 0, 0},
+        {0, sy, 0, 0},
+        {0, 0, sz, 0},
+        {0, 0, 0, 1}
     };
     return cube * mat_scale;
 }
@@ -926,22 +922,33 @@ matrix_t scaling(matrix_t cube, double sx, double sy, double sz) {
 matrix_t operator*(const matrix_t &a, const matrix_t &b) {
     return matrix_multiply(a, b);
 }
+
 matrix_t operator*(const matrix_t &a, const vector_t &v) {
     return a * matrix_t{v};
 }
-matrix_t operator*(const vector_t &v, const matrix_t &a ) {
-    return  matrix_t{v} * a;
+
+matrix_t operator*(const vector_t &v, const matrix_t &a) {
+    return matrix_t{v} * a;
 }
 
-matrix_t operator*(const vector_t &v, const  vector_t &w ) {
-    return  matrix_t{v} * matrix_t{w};
+matrix_t operator*(const vector_t &v, const vector_t &w) {
+    return matrix_t{v} * matrix_t{w};
 }
+
+matrix_t operator^(const matrix_t &mat, const char op) {
+    if (op == 't') {
+        return transpose(mat);
+    }
+    throw std::invalid_argument("Invalid operator");
+}
+
+
 matrix_t get_perspective_matrix_Z_d(double d) {
     matrix_t T_perspective = {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 1.0 / d},
-            {0, 0, 0, 0}
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 1.0 / d},
+        {0, 0, 0, 0}
     };
     return T_perspective;
 }
@@ -962,30 +969,31 @@ matrix_t get_perspective_calculated_matrix(vector_t viewpoint, vector_t r0, vect
     double d0 = n1 * x0 + n2 * y0 + n3 * z0;
 
     matrix_t mat_perspective = {
-            {1, 0, 0, n1 / d0},
-            {0, 1, 0, n2 / d0},
-            {0, 0, 1, n3 / d0},
-            {0, 0, 0, 1}
+        {1, 0, 0, n1 / d0},
+        {0, 1, 0, n2 / d0},
+        {0, 0, 1, n3 / d0},
+        {0, 0, 0, 1}
     };
     matrix_t mat_translation_to_center = {
-            {1,  0,  0,  0},
-            {0,  1,  0,  0},
-            {0,  0,  1,  0},
-            {-a, -b, -c, 1}
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {-a, -b, -c, 1}
     };
 
 
     matrix_t mat_translation_invers = {
-            {1, 0, 0, 0},
-            {0, 1, 0, 0},
-            {0, 0, 1, 0},
-            {a, b, c, 1}
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {a, b, c, 1}
     };
     return mat_translation_to_center * mat_perspective * mat_translation_invers;
 };
 
-matrix_t get_perspective_calculated_matrix(double a, double b, double c, double x0, double y0, double z0, double n1, double n2,
-                                  double n3) {
+matrix_t get_perspective_calculated_matrix(double a, double b, double c, double x0, double y0, double z0, double n1,
+                                           double n2,
+                                           double n3) {
     vector_t viewpoint = {a, b, c};
     vector_t r0 = {x0, y0, z0};
     vector_t n = {n1, n2, n3};
@@ -1027,11 +1035,20 @@ matrix_t get_cavalier_matrix(double angle) {
     return Tcv;
 }
 
+void circle_full_bresenham(int xc, int yc, int r2, int color = 15, int r1 = 0) {
+    for (int i = r1; i <= r2; i += 1) {
+        cercle_bresenham(xc, yc, i, color);
+    }
+}
+
 // Function to draw a vector from origin
-void drawVector(vector_t v, int color = WHITE, int lw = 5) {
+void drawVector(vector_t v, string label = "", int color = WHITE, int lw = 5) {
     line_bresenham(0, 0, v[1], v[2], color, lw); // Draw the arrow shaft
     setcolor(color);
-    circle(v[1] + getmaxx() / 2, getmaxy() / 2 - v[2], 5); // Draw the arrow tip
+    circle_full_bresenham(v[1], v[2], 5, color);
+    char label_c[100];
+    strcpy(label_c, label.c_str());
+    outtextxy(v[1] + getmaxx() / 2 + 6, getmaxy() / 2 - v[2] + 3, label_c);
 }
 
 
@@ -1061,6 +1078,7 @@ matrix_t get_matrix_alin_v_with_Z(vector_t V) {
     };
     return T_RtZ * T_RtY;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -1164,29 +1182,28 @@ void bezierCubic(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3)
 
 matrix_t get_parallelogram(double a, double b, double c, double is_homogen = 0) {
     if (is_homogen) {
-
         return {
-                {0, 0, 0, 1},   // A
-                {a, 0, 0, 1},   // B
-                {a, b, 0, 1},   // C
-                {0, b, 0, 1},   // D
+            {0, 0, 0, 1}, // A
+            {a, 0, 0, 1}, // B
+            {a, b, 0, 1}, // C
+            {0, b, 0, 1}, // D
 
-                {0, 0, c, 1},   // E
-                {a, 0, c, 1},   // F
-                {a, b, c, 1},   // G
-                {0, b, c, 1},   // H
+            {0, 0, c, 1}, // E
+            {a, 0, c, 1}, // F
+            {a, b, c, 1}, // G
+            {0, b, c, 1}, // H
         };
     } else {
         return {
-                {0, 0, 0},   // A
-                {a, 0, 0},   // B
-                {a, b, 0},   // C
-                {0, b, 0},   // D
+            {0, 0, 0}, // A
+            {a, 0, 0}, // B
+            {a, b, 0}, // C
+            {0, b, 0}, // D
 
-                {0, 0, c},   // E
-                {a, 0, c},   // F
-                {a, b, c},   // G
-                {0, b, c},   // H
+            {0, 0, c}, // E
+            {a, 0, c}, // F
+            {a, b, c}, // G
+            {0, b, c}, // H
         };
     }
 }

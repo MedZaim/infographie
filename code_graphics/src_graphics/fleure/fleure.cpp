@@ -1,12 +1,9 @@
 //
 // Created by lenovo on 02/11/2024.
 //
-//
-// Created by lenovo on 02/11/2024.
+
 #include "../../includs/graphics_utils.h"
-#include <cmath>
-#include <iostream>
-#include <ctime>
+
 
 
 void fleur(int xc = 0, int yc = 0, int r = 60,int a=60,int b=40,int nb_pital=6,

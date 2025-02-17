@@ -1,11 +1,11 @@
 //
 // Created by lenovo on 06/11/2024.
 //
-#include "../../includs/chapes.h"
+#include "../../includs/graphics_utils.h"
 
 #include <iostream>
 
-void draw_mouse() {
+void draw_mouse(int color = 15, int lw = 5) {
     int x, y;
     while (true) {
         if (ismouseclick(WM_LBUTTONDOWN)) {
@@ -20,10 +20,7 @@ void draw_mouse() {
                 x -= getmaxx() / 2;
                 y = getmaxy() / 2 - y;
 
-                pixel9(x, y, 15);
-                pixel9(x+3, y, 15);
-                pixel9(x, y+3, 15);
-                pixel9(x+3, y+3, 15);
+                pixel(x, y, color,lw);
             }
             clearmouseclick(WM_LBUTTONDOWN);
         }
@@ -31,14 +28,10 @@ void draw_mouse() {
 }
 
 int main() {
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, "");
+ initwindow( 640 ,480, "Mouse draw");
 
-    int X_MAX = 640, Y_MAX = 480;
     setbkcolor(5);
-    repere(X_MAX / 2, Y_MAX / 2);
-
-    draw_mouse();
+    draw_mouse(WHITE,9);
 
     getch();
     closegraph();
