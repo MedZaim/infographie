@@ -9,10 +9,38 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+
+//#include "../../includs/graphics_utils.h"
+
+
+
+
 using namespace std;
 
 typedef vector<double> vector_t;
 typedef vector<vector_t> matrix_t;
+
+
+
+
+
+
+
+
+
+// Transformation matrices
+const matrix_t Tcv = {
+    {1.0, 0.0, 0.0, 0.0},
+    {0.0, 1.0, 0.0, 0.0},
+    {sqrt(2) / 2, sqrt(2) / 2, 0.0, 0.0},
+    {0.0, 0.0, 0.0, 1.0}
+};
+
+
+
+
+
+
 
 void affich(matrix_t mat, string label) {
     cout << label << ":[" << endl;
@@ -99,8 +127,8 @@ void reper() {
     line(getmaxx() / 2, getmaxy() / 2, getmaxx()/2+150, getmaxy() / 2 );
     line(getmaxx() / 2, getmaxy() / 2, getmaxx() / 2 , getmaxy()/2-150);
 
-    outtextxy(getmaxx()/2+150, getmaxy()/ 2 , "X");
-    outtextxy(getmaxx()/ 2   , getmaxy()/2-150, "Y");
+    outtextxy(getmaxx()/2+150, getmaxy()/ 2 , (char*)"X");
+    outtextxy(getmaxx()/ 2   , getmaxy()/2-150, (char*)"Y");
 }
 
 // Question 1
@@ -184,7 +212,7 @@ matrix_t T__teta(double d_teta){
 matrix_t T_per = {
     {1, 0, 0, 0},
     {0, 1, 0, 0},
-    {0, 0, 0, -1.0 / 1000},
+    {0, 0, 0, -1.0 / 100},
     {0, 0, 0, 1}
 };
 
@@ -208,10 +236,10 @@ void rotate(matrix_t figure, int color=YELLOW) {
         setcolor(3);
         reper();
         figure = figure * T__teta(d_teta);
-        tracer_p(figure, color);
+        tracer_p(figure, color);                       //*Tcv
         // Sleep for 10 milliseconds
         std::this_thread::sleep_for(std::chrono::milliseconds(30));
-        if (ismouseclick(WM_LBUTTONDOWN)) {
+        if (kbhit()) {
             break;
         }
     }

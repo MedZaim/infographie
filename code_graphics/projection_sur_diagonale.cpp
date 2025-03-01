@@ -20,6 +20,7 @@ void drawCube(const matrix_t cube) {
     }
 }
 
+
 matrix_t projection_pespective(matrix_t cube, double d) {
     matrix_t projectedCube = cube * get_perspective_matrix_Z_d(d);
     // devision des coordonees Xh, Yh, et Zh par Wh
@@ -94,8 +95,10 @@ int main() {
     affich(T, "T");
     affich(projectedCube, "projectedCube");
 
+    matrix_t scaled_cube = projectedCube * get_scaling_matrix(1.5,1.5,1.5,1);
+    affich(scaled_cube, "scaled_cube");
     cleardevice();
-    drawCube(projectedCube);
+    drawCube(scaled_cube);
 
     getch();
     closegraph();

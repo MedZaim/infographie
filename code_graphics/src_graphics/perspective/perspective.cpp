@@ -7,7 +7,7 @@ matrix_t get_perspective_matrix_o_r0_n(double x0, double y0,double z0, double n1
     matrix_t T_perspective = {
         {1, 0, 0, n1 / d0},
         {0, 1, 0, n2 / d0},
-        {0, 0, 1, n3 / d0},
+        {0, 0, 0, n3 / d0},
         {0, 0, 0, 1}
     };
     return T_perspective;
@@ -86,34 +86,7 @@ void tracer_p(matrix_t cube, int color = GREEN) {
         outtextxy(x + x_ofset + 2, -y + y_ofset + 1, label);
     }
 }
-void tracer_points_de_fuit(matrix_t resRot, int color = 15, int lw = 1) {
-    vector_t vecteur01 = findIntersection(resRot[0][0], resRot[0][1], resRot[3][0], resRot[3][1]);
-    vector_t vecteur02 = findIntersection(resRot[4][0], resRot[4][1], resRot[7][0], resRot[7][1]);
-    vector_t resultat = findIntersection(vecteur01, vecteur02);
 
-    line_bresenham(resRot[0][0], resRot[0][1], resultat[0], resultat[1], WHITE, lw);
-    line_bresenham(resRot[4][0], resRot[4][1], resultat[0], resultat[1], WHITE, lw);
-    line_bresenham(resRot[1][0], resRot[1][1], resultat[0], resultat[1], WHITE, lw);
-    line_bresenham(resRot[5][0], resRot[5][1], resultat[0], resultat[1], WHITE, lw);
-
-    vector_t vecteur11 = findIntersection(resRot[0][0], resRot[0][1], resRot[4][0], resRot[4][1]);
-    vector_t vecteur12 = findIntersection(resRot[3][0], resRot[3][1], resRot[7][0], resRot[7][1]);
-    vector_t resultat1 = findIntersection(vecteur11, vecteur12);
-
-    line_bresenham(resRot[0][0], resRot[0][1], resultat1[0], resultat1[1], WHITE, lw);
-    line_bresenham(resRot[3][0], resRot[3][1], resultat1[0], resultat1[1], WHITE, lw);
-    line_bresenham(resRot[1][0], resRot[1][1], resultat1[0], resultat1[1], WHITE, lw);
-    line_bresenham(resRot[5][0], resRot[5][1], resultat1[0], resultat1[1], WHITE, lw);
-
-    vector_t vecteur21 = findIntersection(resRot[0][0], resRot[0][1], resRot[1][0], resRot[1][1]);
-    vector_t vecteur22 = findIntersection(resRot[6][0], resRot[6][1], resRot[7][0], resRot[7][1]);
-    vector_t resultat2 = findIntersection(vecteur21, vecteur22);
-
-    line_bresenham(resRot[6][0], resRot[6][1], resultat2[0], resultat2[1], WHITE, lw);
-    line_bresenham(resRot[0][0], resRot[0][1], resultat2[0], resultat2[1], WHITE, lw);
-    line_bresenham(resRot[3][0], resRot[3][1], resultat2[0], resultat2[1], WHITE, lw);
-    line_bresenham(resRot[7][0], resRot[7][1], resultat2[0], resultat2[1], WHITE, lw);
-}
 
 
 int main() {
@@ -122,18 +95,17 @@ int main() {
 
     matrix_t cube = get_parallelogram(200,200,200,1);
 
-    vector_t center_proj = {0, 0, 400};
-    vector_t r0 = {0, 0, 200};
-    vector_t n = {0, 0, 200};
+    point_t center_proj = {0, 0, 400};  // centre de projection
+    point_t r0 = {0, 0, 200};           // point de référence
+    vector_t n = {0, 0, 200};            // vecteur normal
 
 
     matrix_t T_tr = get_perspective_matrix_cp_r0_n(center_proj, r0, n);
-
     matrix_t cube_transformd = divid_on_w(cube * T_tr);
-   // tracer_points_de_fuit(cube_transformd);
+
     cleardevice();
 
-    tracer_p(cube_transformd);
+   tracer_p(cube_transformd * get_scaling_matrix(2,2,2,0));
 
     affich(cube, "cube");
     affich(T_tr, "T_tr");

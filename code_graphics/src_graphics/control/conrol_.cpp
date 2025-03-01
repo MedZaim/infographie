@@ -57,38 +57,55 @@ matrix_t display_cube(const matrix_t cube) {
     return cube1;
 }
 
-void rotate(matrix_t cube, matrix_t reper, matrix_t M) {
-    while (true) {
-        cube = (cube * M);
-        cleardevice();
-        Tracer_cube(cube * Tcv);
-        display_BH_(cube * Tcv);
-
-        display_reper(reper);
-    }
-}
-
 int main() {
     initwindow(800, 600, "Controle");
 
     matrix_t cube1, cube = get_parallelogram(200, 100, 100, 1);
-    Tracer_cube(cube * Tcv);
-    display_BH_(cube * Tcv);
-    matrix_t reper = get_matrix_reper(cube * Tcv, 300);
+    Tracer_cube(cube);
+    display_BH_(cube);
+    matrix_t reper = get_matrix_reper(cube, 300);
     display_reper(reper);
     getch();
 
-    matrix_t Tras = M_trs({-200, 0, 0, 1});
+    //rotation de x pour que le point H soit sur le plan xOz
+    matrix_t Rot_x = get_matrix_rot_x(PI / 4);
 
-    matrix_t Trs_inverse = M_trs({200, 0, 0, 1});
+    matrix_t Tras = M_trs({0, 0, -sqrt(2 * 100 * 100), 1});
 
-    //  aligner hb avec z
-    matrix_t aliner = get_matrix_alin_v_with_Z(cube[7] - cube[0]);
+    matrix_t Trs_inverse = M_trs({0, 0, sqrt(2 * 100 * 100), 1});
+
+    // angle de rotation /x pour aligner hb avec z
+    double theta = atan2_(sqrt(2 * 100 * 100) / sqrt(2 * 100 * 100 + 200 * 200),
+                          -200 / sqrt(2 * 100 * 100 + 200 * 200));
+    //matrice dalignemen de hb avec l'axe des z
+    matrix_t Rot_y = M_rot_y(theta);
+    matrix_t Rot_y_ = M_rot_y(-theta);
+
+
+    //rotation  continu /z
+    M_rot_z(0.01);
 
     //matrice de tronsformation globale
 
-    matrix_t M = Tras * aliner * M_rot_z(0.01) * (aliner ^'t') * Trs_inverse;
+    matrix_t M = Rot_x * Tras * Rot_y * M_rot_z(0.01) * (Rot_y ^'t') * Trs_inverse * Rot_x ^'t';
 
-    rotate(cube, reper, M);
+    affich(get_matrix_rot_y(0), "get_matrix_rot_y(0)=");
+    affich(get_matrix_rot_x(0), "get_matrix_rot_x(0)=");
+    affich(get_matrix_rot_x(0) ^ 't', "get_matrix_rot_x(0)^'t'=");
+    affich(Rot_y, "Rot_y=");
+    affich(Rot_y_, "Rot_y_=");
+    affich(Rot_y^'t', "Rot_y^'t'=");
+
+    affich(M, "M=");
+    affich(Rot_y* Rot_x ^'t', "Rot_y* Rot_x ^'t'=");
+
+    while (true) {
+        cleardevice();
+        cube1 = cube *Rot_y* Rot_x ^'t';
+        display_reper(reper);
+        Tracer_cube(cube1);
+        display_BH_(cube1, RED, 1);
+        delay(2);
+    }
     getch();
 }

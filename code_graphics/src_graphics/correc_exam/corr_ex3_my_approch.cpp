@@ -179,7 +179,7 @@ matrix_t T = T_tr * T_RtZ * T_RtX * R_Z * transpose(T_RtX) * transpose(T_RtZ) * 
 matrix_t T_per = {
     {1, 0, 0, 0},
     {0, 1, 0, 0},
-    {0, 0, 0, -1.0 / 1000},
+    {0, 0, 0, -1.0 / 100},
     {0, 0, 0, 1}
 };
 
@@ -206,7 +206,7 @@ void rotate(matrix_t figure, int color=YELLOW) {
         tracer_p(figure, color);
         // Sleep for 10 milliseconds
         std::this_thread::sleep_for(std::chrono::milliseconds(30));
-        if (ismouseclick(WM_LBUTTONDOWN)) {
+        if (kbhit()) {
             break;
         }
     }

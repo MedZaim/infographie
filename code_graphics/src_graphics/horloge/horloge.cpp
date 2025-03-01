@@ -15,8 +15,6 @@ void Dessine_Cadran_Horloge(int radius, int xc, int yc) {
         char number[12];
         sprintf(number, "%d", (i == 0) ? 12 : i);
         outtextxy(x + xc + getmaxx() / 2, (y - yc + getmaxy() / 2), number);
-
-
     }
 }
 

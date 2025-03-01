@@ -70,45 +70,6 @@ bara:
 }
 
 
-double get_pent(point_2d_t p1, point_2d_t p2) {
-    return (p2.y - p1.y) / (double) (p2.x - p1.x);
-}
-
-double get_distance(point_2d_t p1, point_2d_t p2) {
-    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
-}
-
-double get_produit_scalaire(point_2d_t p1, point_2d_t p2) {
-    return p1.x * p2.x + p1.y * p2.y;
-}
-
-double atan2_(double y, double x) {
-    if (x > 0) {
-        return atan(y / x); //  1 or 4
-    } else if (x < 0 && y >= 0) {
-        return atan(y / x) + M_PI; //  2
-    } else if (x < 0 && y < 0) {
-        return atan(y / x) - M_PI; //  3
-    } else if (x == 0 && y != 0) {
-        return (y > 0) ? M_PI / 2 : -M_PI / 2; // Positive or negative y-axis
-    } else {
-        return 0; // Undefined angle
-    }
-}
-
-double get_angle(point_2d_t A, point_2d_t O, point_2d_t B) {
-    // Vectors OA and OC
-    double OAx = A[0] - O[0], OAy = A[1] - O[1];
-    double OCx = B[0] - O[0], OCy = B[1] - O[1];
-
-
-    double scalaire_p = OAx * OCx + OAy * OCy;
-    double vectoriel_p = OAx * OCy - OAy * OCx;
-
-    return atan2_(vectoriel_p, scalaire_p);
-}
-
-
 void is_inside_polygon(polygon_t p, point_2d_t point) {
     double angle = 0;
     for (int i = 0; i < p.size(); i++) {
@@ -119,13 +80,9 @@ void is_inside_polygon(polygon_t p, point_2d_t point) {
     } else {
         outtextxy(getmaxx() / 2 + 10 + point[0], getmaxy() / 2 - (10 + point[1]), (char *) "inside");
     }
-    printf("angle = %d\n", angle);
+    cout<<"angle ="<< angle<<endl;
 }
 
-
-void draw_point(point_2d_t p, int color = 15, int lw = 1) {
-    pixel(p.x, p.y, color, lw);
-}
 
 
 int main() {
