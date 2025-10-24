@@ -5,7 +5,8 @@
 
 int main() {
     // Initialize graphics mode
-    initwindow(1000, 800, "Align with Z axis");
+    // show instruction in title
+    initwindow(1000, 800, "Align with Z axis - Appuyez sur une touche pour continuer");
     repere(getmaxx() / 2 , getmaxy() / 2 );
 
     // Original vector V(a, b, c)
@@ -35,4 +36,3 @@ int main() {
 
     return 0;
 }
-

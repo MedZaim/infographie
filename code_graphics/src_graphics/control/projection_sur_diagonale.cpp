@@ -1,5 +1,5 @@
 #include <cmath>
-#include "includs/graphics_utils.h"
+#include "../../includs/graphics_utils.h"
 using namespace std;
 
 
@@ -35,8 +35,9 @@ matrix_t projection_pespective(matrix_t cube, double d) {
 
 int main() {
     // Initialize the graphics window
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, (char *) "");
+    // Use initwindow to show a helpful title and size; this program waits for a key (getch())
+    int screen_w = 800, screen_h = 600;
+    initwindow(screen_w, screen_h, "Projection sur diagonale - Appuyez sur une touche pour continuer");
 
     double x = 300, y = 300, z = 300;
     // Define the cube vertices in homogeneous coordinates
@@ -99,6 +100,7 @@ int main() {
     affich(scaled_cube, "scaled_cube");
     cleardevice();
     drawCube(scaled_cube);
+    display_vertices_labels(scaled_cube,YELLOW);
 
     getch();
     closegraph();

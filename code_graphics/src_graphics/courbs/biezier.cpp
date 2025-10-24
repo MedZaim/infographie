@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "../../Graphics/graphics.h"
+
 using namespace std;
 
 // Fonction pour calculer les points d'une courbe de Bézier linéaire
@@ -33,8 +35,7 @@ void bezierCubic(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3)
 
 int main() {
     // Initialisation de la fenêtre graphique
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, (char *) "");
+    initwindow(640, 480, "Courbes de Bezier - Lineaire, Quadratique et Cubique | => cliquer sur le clavier pour continue");
 
     // Points de contrôle pour la courbe de Bézier linéaire
     int x0_linear = 100, y0_linear = 100; // Point de départ
@@ -54,7 +55,7 @@ int main() {
     int color_courb = 13;
     int color_ponit = YELLOW;
 
-    setcolor(color_ponit);
+    setcolor(GREEN);
     circle(x0_linear, y0_linear, 5);
     circle(x1_linear, y1_linear, 5);
     getch();
@@ -64,7 +65,7 @@ int main() {
     bezierLinear(x0_linear, y0_linear, x1_linear, y1_linear); // Linéaire
     getch();
 
-    setcolor(color_ponit);
+    setcolor(BLUE);
     // Points de contrôle pour la courbe quadratique
     circle(x0_quad, y0_quad, 5);
     circle(x1_quad, y1_quad, 5);

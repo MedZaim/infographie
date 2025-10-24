@@ -1,4 +1,3 @@
-
 #include "../../includs/graphics_utils.h"
 
 
@@ -91,7 +90,8 @@ void tracer_p(matrix_t cube, int color = GREEN) {
 
 int main() {
 
-    initwindow(800, 500, "Graphics Window");
+    // Show instruction in the window title and make the title descriptive
+    initwindow(800, 500, "Perspective (projection) - Appuyez sur une touche pour continuer");
 
     matrix_t cube = get_parallelogram(200,200,200,1);
 
@@ -113,4 +113,3 @@ int main() {
     getch();
     return 0;
 }
-

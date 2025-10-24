@@ -20,7 +20,7 @@ void ajuster() {
 }
 
 int main() {
-    initwindow(640, 480, "ajuster 2 seg par mouse click");
+    initwindow(640, 480, "Ajuster 2 seg par mouse click | click left --> right");
     // repere(getmaxx() / 2, getmaxy() / 2);
 
     ajuster();

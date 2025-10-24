@@ -1,4 +1,4 @@
-#include "graphics.h"
+#include "C:\Users\LENOVO i7\Desktop\ligacy_progects\infographie\code_graphics\Graphics\graphics.h"
 #include <cmath>
 #include <vector>
 #include <iomanip>
@@ -18,7 +18,7 @@ typedef vector<point_2d_t> segment_t;
 typedef vector_t point_t;
 
 /////////////////////////////////////////////////////////////////////
-/////////////// declard functions ///////////////////////////////////
+/////////////// declared functions ///////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
 void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw);
@@ -96,6 +96,17 @@ void pixel(int x, int y, int color, int lw = 1) {
         default:
             putpixel(x, y, color);
             break;
+    }
+}
+
+void display_vertices_labels(const matrix_t &points, int color = WHITE) {
+    setcolor(color);
+    for (size_t i = 0; i < points.size(); ++i) {
+        int x = points[i][0] + getmaxx() / 2;
+        int y = getmaxy() / 2 - points[i][1];
+        char label[4];
+        snprintf(label, sizeof(label), "%c", 'A' + i); // Label vertices as A, B, C, ...
+        outtextxy(x, y, label);
     }
 }
 
@@ -1125,11 +1136,11 @@ double atan2_(double sn, double cs) {
     if (cs > 0) {
         return atan(sn / cs); //  1 or 4
     } else if (cs < 0 && sn >= 0) {
-        return atan(sn / cs) + M_PI; //  2
+        return atan(sn / cs) + PI; //  2
     } else if (cs < 0 && sn < 0) {
-        return atan(sn / cs) - M_PI; //  3
+        return atan(sn / cs) - PI; //  3
     } else if (cs == 0 && sn != 0) {
-        return (sn > 0) ? M_PI / 2 : -M_PI / 2; // Positive or negative y-axis
+        return (sn > 0) ? PI / 2 : -PI / 2; // Positive or negative y-axis
     } else {
         return 0; // Undefined angle
     }
@@ -1151,7 +1162,7 @@ double get_angle(point_2d_t A, point_2d_t O, point_2d_t B) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-#include <graphics.h>
+#include "C:\Users\LENOVO i7\Desktop\ligacy_progects\infographie\code_graphics\Graphics\graphics.h"
 #include <iostream>
 #include <cmath>
 

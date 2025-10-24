@@ -49,7 +49,8 @@ void pendule(point_t C, int r = 100, double f = 1.0 / 4.0, double a = 1.0 / 10.0
 
 int main() {
 
-    initwindow(640, 480, "Pendule");
+    // This animation listens for a key to stop; indicate that in the title
+    initwindow(640, 480, "Pendule - Appuyez sur une touche pour arrêter");
 
     pendule({0, 0}, 150);
 

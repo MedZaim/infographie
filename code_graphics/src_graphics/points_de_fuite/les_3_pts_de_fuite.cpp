@@ -68,7 +68,8 @@ void Tracer_cube(double resRot[8][4]) {
 
 
 int main() {
-    initwindow(800, 500, "Les 3 points de fuite");
+    // Show instruction in the window title
+    initwindow(800, 500, "Les 3 points de fuite - Appuyez sur une touche pour continuer");
 
     matrix_t cube1 = {
         {100, 100, 200, 100}, // Vertex A

@@ -86,7 +86,8 @@ void is_inside_polygon(polygon_t p, point_2d_t point) {
 
 
 int main() {
-    initwindow(800, 500, "Polygon");
+    // Indicate mouse-based interaction (this program draws polygons via mouse clicks)
+    initwindow(800, 500, "Polygon - Utilisez la souris pour dessiner");
 
 
     polygon_t po = draw_polygon_by_mouse(13, 0, 1);

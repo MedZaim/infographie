@@ -79,7 +79,8 @@ void  display_reper(matrix_t reper,int color=YELLOW) {
 int main() {
     // Initialize the graphics library and create a graphical window
     init_graph();
-    initwindow(800, 500, "Graphics Window");
+    // use a descriptive title (no "press key" hint since this is an animated loop)
+    initwindow(800, 500, "Courbe & Projection - animation");
 
     // Center de projection
     double a = 50, b = 50, c = 50;
@@ -96,7 +97,7 @@ int main() {
 
 
     while (true) {
-        // cube = rotation_z(cube, PI / 20);
+         cube = rotation_z(cube, PI / 20);
         cleardevice();
         matrix_t cube1 = cavalier(cube);
         Tracer_cube(cube1);

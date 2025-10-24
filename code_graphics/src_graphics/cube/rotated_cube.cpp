@@ -1,12 +1,13 @@
 #include <iostream>
 #include <math.h>
 #include <graphics.h>
-#include "includs/graphics_utils.h"
+#include "../includs/graphics_utils.h"
 
 #define PI 3.141592653589793
 
 void initialisation_graph() {
-    initwindow(800, 700, "Dessin de cube en projection");
+    // Show instruction in the window title
+    initwindow(800, 700, "Dessin de cube en projection - Appuyez sur une touche pour continuer");
 }
 
 void tracer(int x, int y, int color) {

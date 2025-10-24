@@ -2,7 +2,10 @@
 // Created by lenovo on 16/12/2024.
 //
 #include <graphics.h>
-#include <math.h>
+#include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #include <vector>
 #include <iostream>
 
@@ -89,8 +92,9 @@ void drow_cube(std::vector<std::pair<int, int>> screen_points, int labeled = 1) 
 
 int main() {
     // Initialize the graphics window
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, (char *) "");
+    // Initialize graphics window (no 'press key' hint because this program animates continuously)
+    int screen_w = 640, screen_h = 480;
+    initwindow(screen_w, screen_h, "Perspective (americain)");
 
     // Screen dimensions
     const int screen_width = getmaxx();
