@@ -58,6 +58,17 @@ The repository includes:
 - Many interactive mouse-driven demos (draw lines/rectangles/ellipses by dragging and clicking).
 
 
+## Screenshots
+
+Below are two representative screenshots captured from the project. Click to view full-size.
+
+- UI Launcher (Qt):
+  <a href="docs/assets/infographie_UI_Launcher.png"><img src="docs/assets/infographie_UI_Launcher.png" alt="UI Launcher – grid of sample buttons" width="900"></a>
+
+- Hello Graphics sample window:
+  <a href="docs/assets/hello_graphics.png"><img src="docs/assets/hello_graphics.png" alt="Hello Graphics sample window" width="900"></a>
+
+
 ## Prerequisites (Windows)
 
 - MinGW or TDM-GCC (32 or 64-bit) with g++ on PATH. The UI defaults to `C:/TDM-GCC-32/bin/g++.exe`—you can change this in `UI_luncher_infographie_projects/mainwindow.cpp` (variable `gppPath`).
@@ -172,3 +183,54 @@ C:\\TDM-GCC-32\\bin\\g++.exe ^
 
 - WinBGIm for enabling classic BGI-style graphics on modern Windows/MinGW.
 - Qt for the cross-platform UI toolkit.
+
+## Add your own sample (how to use)
+
+The UI launcher will automatically show a button for every `*.cpp` file under `code_graphics/src_graphics/**`.
+To add your own graphic program and run it from the launcher:
+
+1) Open the sources folder from the toolbar
+- In the launcher, click: Toolbar > “Open src_graphics”.
+- This opens `code_graphics/src_graphics` in Explorer.
+
+2) Create a new subfolder and a C++ file
+- Create a new folder, for example: `code_graphics/src_graphics/my_demo/`.
+- Inside it, create a file, for example: `my_first_demo.cpp`.
+
+3) Write your graphic code with a standard `main()`
+- Your file must define `int main()` so the launcher can compile and run it.
+- Minimal starter template you can paste:
+
+```cpp
+#include "../../Graphics/graphics.h"           // WinBGIm
+#include "../../includs/graphics_utils.h"      // Optional helpers from this repo
+
+int main() {
+    // Open a window (width, height, title)
+    initwindow(800, 600, "My First Demo");
+
+    // Draw something
+    circle(0, 0, 100);                // circle centered at screen center (utils remap coordinates)
+    line_bresenham(-150, 0, 150, 0, WHITE, 1);
+
+    getch();                          // wait for a key
+    closegraph();                     // close window
+    return 0;
+}
+```
+
+Notes:
+- Includes: Because your file sits under `code_graphics/src_graphics/<your_folder>`, `../../Graphics/graphics.h` and `../../includs/graphics_utils.h` resolve correctly. Alternatively, you can use `#include "code_graphics/Graphics/graphics.h"` if you prefer project-root style includes (the UI adds project root to include paths).
+- PI macro: The UI defines `-DPI=3.14159265358979323846` at compile time; you may use `PI` directly.
+- Subsystem: The UI forces the console subsystem, so `main()` is required (no `WinMain`).
+
+4) Refresh and run
+- Return to the launcher and click “Refresh”.
+- Your new file will appear as a button under the folder name (e.g. “my_first_demo”).
+- Click the button to compile into `build_exes/` and run.
+
+Troubleshooting
+- Button doesn’t appear: Ensure the file extension is `.cpp`, it’s placed under `code_graphics/src_graphics/<your_folder>/`, and you clicked “Refresh”.
+- “No entry point”: Ensure your file contains a standard `int main()`. The launcher can auto-wrap some `main_*` patterns, but `main()` is recommended.
+- “graphics.h not found”: Use the relative includes shown above, or ensure your includes match the folder depth. The UI already adds `Graphics/`, `includs/`, and project root to the include paths.
+- Link errors (WinMain@16): The launcher compiles as a console app; confirm you didn’t add `-mwindows` in your code or flags.
