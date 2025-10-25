@@ -1,3 +1,24 @@
+# Projet d'Infographie – Master Machine Learning Avancé et Intelligence Multimédia (MLAIM, FSDM, USMBA) | WinBGIm + Qt UI Launcher
+
+Ce dépôt s’inscrit dans le cadre de ma formation au Master Machine Learning Avancé et Intelligence Multimédia (MLAIM) à la Faculté des Sciences Dhar El Mahraz (FSDM), Université Sidi Mohamed Ben Abdellah (USMBA), Fès – Maroc, dans le cours d’Infographie. Il regroupe l’ensemble des exercices, travaux pratiques (TP), contrôles et sujets d’examen, accompagnés d’un lanceur graphique (Qt) et d’une boîte à outils WinBGIm permettant la compilation et l’exécution rapides des démonstrations.
+
+Objectifs pédagogiques
+- Mettre en œuvre les fondements algorithmiques du dessin (lignes, cercles, ellipses – algorithmes de Bresenham et variantes),
+- Manipuler la géométrie 2D/3D (transformations, projections parallèle/perspective, repères, matrices),
+- Développer des interactions temps réel (dessin à la souris, visualisation dynamique),
+- Structurer un pipeline reproductible de compilation/exécution (UI Qt et CMake, MinGW/WinBGIm),
+- Consolider les apprentissages par des exercices guidés, TP, contrôles et examens.
+
+Avertissement pédagogique
+- Le code est volontairement didactique (priorité à la lisibilité et à la progressivité). Certaines implémentations ne visent pas l’optimisation « production », mais l’illustration des concepts vus en cours.
+- Le projet cible Windows/MinGW avec WinBGIm; l’UI Qt sert de lanceur et de « laboratoire » pour explorer rapidement les exercices.
+
+---
+
+## English summary
+
+Below is the original technical README (unchanged in substance), detailing repository structure, setup, features, and usage in English. The French preface above provides academic context and learning objectives.
+
 # Infographie Projects (WinBGIm + Qt UI Launcher)
 
 A collection of interactive computer graphics exercises and demos built with the WinBGIm graphics library (Borland Graphics Interface for Windows/MinGW) and a Qt-based UI launcher that can compile and run individual samples on demand.
@@ -151,4 +172,3 @@ C:\\TDM-GCC-32\\bin\\g++.exe ^
 
 - WinBGIm for enabling classic BGI-style graphics on modern Windows/MinGW.
 - Qt for the cross-platform UI toolkit.
-
