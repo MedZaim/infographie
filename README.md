@@ -69,6 +69,25 @@ Below are two representative screenshots captured from the project. Click to vie
   <a href="docs/assets/hello_graphics.png"><img src="docs/assets/hello_graphics.png" alt="Hello Graphics sample window" width="900"></a>
 
 
+## Demo video
+
+Option A — Embed an MP4 stored in this repo (recommended for short clips):
+
+<!-- The player below will work once you add docs/assets/demo.mp4 -->
+<video src="docs/assets/demo.mp4" controls width="900" poster="docs/assets/hello_graphics.png">
+  Your browser does not support embedded videos. Here is a direct link: 
+  <a href="docs/assets/demo.mp4">docs/assets/demo.mp4</a>
+</video>
+
+<p><a href="docs/assets/demo.mp4">Direct link to demo.mp4</a></p>
+
+Option B — Link to YouTube (good for longer videos):
+
+<a href="https://youtu.be/REPLACE_WITH_VIDEO_ID" target="_blank">
+  <img src="docs/assets/infographie_UI_Launcher.png" alt="Watch the demo on YouTube" width="900">
+</a>
+
+
 ## Prerequisites (Windows)
 
 - MinGW or TDM-GCC (32 or 64-bit) with g++ on PATH. The UI defaults to `C:/TDM-GCC-32/bin/g++.exe`—you can change this in `UI_luncher_infographie_projects/mainwindow.cpp` (variable `gppPath`).
@@ -220,7 +239,7 @@ int main() {
 ```
 
 Notes:
-- Includes: Because your file sits under `code_graphics/src_graphics/<your_folder>`, `../../Graphics/graphics.h` and `../../includs/graphics_utils.h` resolve correctly. Alternatively, you can use `#include "code_graphics/Graphics/graphics.h"` if you prefer project-root style includes (the UI adds project root to include paths).
+- Includes: Because your file sits under `code_graphics/src_graphics/<your_folder>`, `../../Graphics/graphics.h` and `../../includs/graphics_utils.h` resolve correctement. Alternatively, you can use `#include "code_graphics/Graphics/graphics.h"` if you prefer project-root style includes (the UI adds project root to include paths).
 - PI macro: The UI defines `-DPI=3.14159265358979323846` at compile time; you may use `PI` directly.
 - Subsystem: The UI forces the console subsystem, so `main()` is required (no `WinMain`).
 
@@ -230,7 +249,7 @@ Notes:
 - Click the button to compile into `build_exes/` and run.
 
 Troubleshooting
-- Button doesn’t appear: Ensure the file extension is `.cpp`, it’s placed under `code_graphics/src_graphics/<your_folder>/`, and you clicked “Refresh”.
+- Button doesn’t apparaître: Ensure the file extension is `.cpp`, it’s placed under `code_graphics/src_graphics/<your_folder>/`, and you clicked “Refresh”.
 - “No entry point”: Ensure your file contains a standard `int main()`. The launcher can auto-wrap some `main_*` patterns, but `main()` is recommended.
 - “graphics.h not found”: Use the relative includes shown above, or ensure your includes match the folder depth. The UI already adds `Graphics/`, `includs/`, and project root to the include paths.
 - Link errors (WinMain@16): The launcher compiles as a console app; confirm you didn’t add `-mwindows` in your code or flags.
