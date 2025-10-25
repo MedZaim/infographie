@@ -59,6 +59,44 @@
         </property>
        </widget>
       </item>
+      <!-- Added OpenBuilds and OpenSource buttons and theme combo next to Refresh -->
+      <item>
+       <widget class="QPushButton" name="openBuildExesButton">
+        <property name="text">
+         <string>Open build exes</string>
+        </property>
+        <property name="toolTip">
+         <string>Open the generated executables folder (build_exes)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="openSourceButton">
+        <property name="text">
+         <string>Open source code</string>
+        </property>
+        <property name="toolTip">
+         <string>Open the source folder (code_graphics/src_graphics)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="themeCombo">
+        <property name="toolTip">
+         <string>Toggle UI theme (Light / Dark)</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Light</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dark</string>
+         </property>
+        </item>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
