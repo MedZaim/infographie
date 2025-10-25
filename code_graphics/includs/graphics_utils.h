@@ -84,6 +84,9 @@ void pixel(int x, int y, int color, int lw = 1) {
     x += getmaxx() / 2;
     y = getmaxy() / 2 - y;
     switch (lw) {
+        case 1:
+            putpixel(x, y, color);
+            break;
         case 5:
             pixel5(x, y, color);
             break;
@@ -483,7 +486,7 @@ void line_bresenham(int x1, int y1, int x2, int y2, int color, int lw) {
 }
 
 
-void line_bresenham(point_2d_t p1, point_2d_t p2, int color, int lw) {
+void line_bresenham(point_t p1, point_t p2, int color, int lw) {
     line_bresenham(p1[0], p1[1], p2[0], p2[1], color, lw);
 }
 
@@ -639,13 +642,13 @@ void ellipse_polynomial(int a, int b, int xc, int yc, int color) {
 
 //TRIGONOMETRIC ALGORITHMS
 //trigonometric circle algorithm
-void circle_trigonometric(int xc, int yc, int r, int color) {
+void circle_trigonometric(int xc, int yc, int r, int color,int lw=1) {
     int x;
     int y;
     for (float i = 0; i < 2 * PI; i = i + 0.002) {
         x = r * cos(i * PI);
         y = r * sin(i * PI);
-        pixel(x + xc, y + yc, color);
+        pixel(x + xc, y + yc, color, lw);
     }
 }
 
@@ -755,7 +758,7 @@ void rectangle_by_mouse_click_rotate(int color = 15, int color_bk = 0, int lw = 
     }
 }
 
-void ellipse_teta(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15) {
+void ellipse_teta(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15,int wl=1) {
     double x, y;
     point_2d_t p;
     for (double i = 0; i < 2 * PI; i = i + 0.03) {
@@ -763,7 +766,7 @@ void ellipse_teta(int a, int b, int xc = 0, int yc = 0, double teta = 0, int col
         y = b * sin(i * PI);
 
         p = rotation({x, y}, teta);
-        pixel(p[0] + xc, p[1] + yc, color);
+        pixel(p[0] + xc, p[1] + yc, color,wl);
     }
 }
 
@@ -826,10 +829,13 @@ void ellipse_p_p_by_mouse(double teta = 0, int color = 15, int color_bk = 0, int
 
 
 
-void ellipse_teta_full(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15) {
+void ellipse_teta_full(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15, int wl = 1) {
     for (int b_ = b; b_ >= 0; b_ -= 3) {
-        ellipse_teta(a, b_, xc, yc, teta, color);
+        ellipse_teta(a, b_, xc, yc, teta, color, wl);
     }
+}
+void ellipse_teta_full(int a, int b, point_t center={0,0}, double teta = 0, int color = 15, int wl = 1) {
+    ellipse_teta_full(a, b, center[0], center[1], teta, color, wl);
 }
 
 void ellipse_full_by_ligne(int a, int b, int xc = 0, int yc = 0, double teta = 0, int color = 15, int lw = 1) {
@@ -845,6 +851,203 @@ void ellipse_full_by_ligne(int a, int b, int xc = 0, int yc = 0, double teta = 0
         line_bresenham(p1[0] + xc, p1[1] + yc, p2[0] + xc, p2[1] + yc, color, lw);
     }
 }
+
+
+void fleur(int xc = 0, int yc = 0, int r = 60,int a=60,int b=40, int wl=1,int nb_pital=6,
+           int color = 15, int color_c = YELLOW, int color_ex = RED) {
+    int xx,yy,rr=  r+a;
+    for(int i=0;i<360;i+=360/nb_pital){
+        xx= rr*cos(i*PI/180);
+        yy= rr*sin(i*PI/180);
+        ellipse_teta_full(a,b,xx+xc,yy+yc,i*PI/180,color_ex,wl);
+    }
+    cercle_full_bresenham(xc, yc, r, 0, color_c);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// fleur avec la tige et les feuilles  /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+ void draw_leaf(int x0, int y0, int leaf_len, int leaf_width,
+                      bool isLeft = false, int color = LIGHTGREEN, int lw = 5){
+
+    const double a = static_cast<double>(leaf_len);
+    const double theta = isLeft ? (-3.0 * PI / 4.0) : (-PI / 4.0);
+
+    const double cx = static_cast<double>(x0) - a * std::cos(theta);
+    const double cy = static_cast<double>(y0) - a * std::sin(theta);
+
+    point_t center_leaf{cx, cy};
+
+    // Orient the ellipse along ±45° depending on the side
+    ellipse_teta_full(leaf_len, leaf_width, center_leaf, theta, color, lw);
+}
+
+// Draw the stem and two leaves.
+ void stem_with_leaves(const point_t &flower_center, int stem_len,
+                             int color_stem = GREEN, int color_leaf = LIGHTGREEN,
+                             int lw_stem = 9, int lw_leaf = 1)
+{
+    // Draw the vertical stem from the flower center downward
+    line_bresenham(point_2d_t{flower_center[0], flower_center[1]},
+                   point_2d_t{flower_center[0], flower_center[1] - static_cast<double>(stem_len)},
+                   color_stem, lw_stem);
+
+    // Attach leaves around the mid and lower parts of the stem
+    const int x = static_cast<int>(flower_center[0]);
+    const int y = static_cast<int>(flower_center[1]);
+
+    // Geometry of leaves (ellipse axes)
+    const int L = stem_len / 4; // major axis (length)
+    const int W = stem_len / 8; // minor axis (width)
+
+    // Positions along the stem (logical Y decreases downward)
+    draw_leaf(x, y - (2 * stem_len / 3), L, W, true,  color_leaf, lw_leaf); // left leaf at ~2/3
+    draw_leaf(x, y - (3.5 * stem_len / 4),     L, W, false, color_leaf, lw_leaf); // right leaf at ~1/3
+}
+
+void flower_stem_leaves(const point_t &flower_center, int stem_len,
+                                   int color_stem = GREEN, int color_leaf = LIGHTGREEN,
+                                   int lw_stem = 9, int lw_leaf = 1)
+{
+    stem_with_leaves(flower_center, stem_len, color_stem, color_leaf, lw_stem, lw_leaf);
+
+    // Draw the flower at the given center. Tweak radii to your taste.
+    fleur(static_cast<int>(flower_center[0]), static_cast<int>(flower_center[1]),
+          stem_len / 6, stem_len / 5, stem_len / 8,5);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////  fractal functions  //////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+void tree(int r = 100, double angle = PI / 3,int nb_branches=4,
+          int nb_vertical_branch = 6,int rf=10, point_2d_t racine = {50, -200}) {
+
+
+    int x =(int) (r * cos(angle));
+    int y = (int)(r * sin(angle));
+    point_2d_t s1 = {racine[0] + x, racine[1] + y};
+    point_2d_t s2 = {racine[0] - x,racine[1] + y};
+
+    printf("x=%d y=%d\n",x,y);
+    printf("s1[0]=%d s1[1]=%d\n",s1[0],s1[1]);
+    printf("s2[0]=%d s2[1]=%d\n",s2[0],s2[1]);
+
+    if(nb_vertical_branch>0) {
+        line_bresenham(racine, s1,  GREEN,9);
+        line_bresenham(racine, s2,  GREEN,9);
+    }else{
+        fleur(racine[0],racine[1],rf,20,10);
+        return;
+    }
+
+
+    tree(r - 10, angle , nb_branches - 1,--nb_vertical_branch,rf, s1);
+    tree(r - 10, angle , nb_branches - 1,--nb_vertical_branch,rf, s2);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////  Horloge  //////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+void Dessine_Cadran_Horloge(int radius, int xc, int yc) {
+    for (int i = 0; i < 12; i++) {
+        double angle = i * (PI / 6) - PI / 2;
+        int x = (int) ((radius) * cos(angle));
+        int y = (int) ((radius) * sin(angle));
+        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+        char number[12];
+        sprintf(number, "%d", (i == 0) ? 12 : i);
+        outtextxy(x + xc + getmaxx() / 2, (y - yc + getmaxy() / 2), number);
+    }
+}
+
+std::time_t getCurrentTime() {
+    // Get the current time
+    std::time_t now = std::time(nullptr);
+    return now;
+}
+
+
+void clock_(int xc = 0, int yc = 0, int r = 200, int color = 15, int color_h_h = GREEN, int color_h_m = YELLOW,
+            int color_h_s = RED, int bk_color = 0) {
+    int h = 0, m = 0, s = 0, xh = 0, yh = 0, xm = 0, ym = 0, xs = 0, ys = 0, xh_ = 0, yh_ = 0, xm_ = 0, ym_ = 0, xs_ = 0, ys_ = 0;
+    cercle_full_bresenham(xc, yc, r + 55, r + 40, color);
+    cercle_full_bresenham(xc, yc, r + 36, r+5 , 14);
+    int rs = r - .2 * r;
+    int rm = r - .3 * r;
+    int rh = r - .5 * r;
+    // degrees
+    for (int i = 0; i < 60; i++) {
+        int x1, y1;
+        int x2 = r * sin((i / 60.0) * 2 * PI);
+        int y2 = r * cos((i / 60.0) * 2 * PI);
+        if (i % 5 == 0) {
+            x1 = (r - 20) * sin((i / 60.0) * 2 * PI);
+            y1 = (r - 20) * cos((i / 60.0) * 2 * PI);
+            if (i % 15 == 0)
+                line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 13);
+            else
+                line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 9);
+        } else {
+            x1 = (r - 10) * sin((i / 60.0) * 2 * PI);
+            y1 = (r - 10) * cos((i / 60.0) * 2 * PI);
+            line_bresenham(x1 + xc, y1 + yc, x2 + xc, y2 + yc, color, 1);
+        }
+
+
+    }
+    Dessine_Cadran_Horloge(r+23, xc-9, yc+7);
+    while (true) {
+
+        std::time_t now = getCurrentTime();
+        std::tm *localTime = std::localtime(&now);
+        h = localTime->tm_hour;
+        m = localTime->tm_min;
+        s = localTime->tm_sec;
+
+
+        xh = rh * sin((h / 12.0) * 2 * PI);
+        yh = rh * cos((h / 12.0) * 2 * PI);
+
+        xm = rm * sin((m / 60.0) * 2 * PI);
+        ym = rm * cos((m / 60.0) * 2 * PI);
+
+        xs = rs * sin((s / 60.0) * 2 * PI);
+        ys = rs * cos((s / 60.0) * 2 * PI);
+
+
+        line_bresenham(xc, yc, xh_ + xc, yh_ + yc, bk_color, 13);
+        line_bresenham(xc, yc, xh + xc, yh + yc, color_h_h, 13);
+
+        line_bresenham(xc, yc, xm_ + xc, ym_ + yc, bk_color, 9);
+        line_bresenham(xc, yc, xm + xc, ym + yc, color_h_m, 9);
+
+        line_bresenham(xc, yc, xs_ + xc, ys_ + yc, bk_color, 5);
+        line_bresenham(xc, yc, xs + xc, ys + yc, color_h_s, 5);
+
+        xh_ = xh;
+        yh_ = yh;
+        xm_ = xm;
+        ym_ = ym;
+        xs_ = xs;
+        ys_ = ys;
+
+    }
+}
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////  3D transforamtions functions  //////////////////////////////////////////////////////
