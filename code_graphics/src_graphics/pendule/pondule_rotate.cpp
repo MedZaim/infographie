@@ -1,6 +1,11 @@
+//
+// Created by LENOVO i7 on 25/10/2025.
+//
+
 #include "../../includs/graphics_utils.h"
 #include <conio.h>
 #include <chrono>
+#include <iostream>
 #include <cmath>
 
 using namespace std;
@@ -20,11 +25,13 @@ void pendule(point_t C, int r = 100, double f = 1.0 / 4.0, double a = 1.0 / 10.0
         ).count();
         double t = (double)(t1 - t0) / 1000.0;
 
-        double xp = r * cos(angle);
-        double yp = r * sin(angle);
+        angle += angular_velocity;
 
-        double Cx = C[0] + xp;
-        double Cy = C[1] + yp;
+        double xp = r * cos(angle);
+        double yp =  r * sin(angle);
+
+        double Cx = C[0] +xp;
+        double Cy = C[1] +yp;
 
         double teta = (teta_m * exp(-a * t)) * cos(2 * PI * f * t) - PI / 2;
 
@@ -32,10 +39,10 @@ void pendule(point_t C, int r = 100, double f = 1.0 / 4.0, double a = 1.0 / 10.0
         y = Cy + r * sin(teta);
 
 
-        line_bresenham({Cx, Cy}, {x, y}, 15, 1);
-        line_bresenham({Cx - 15, Cy}, {Cx + 15, Cy}, 9, 5);
+        line_bresenham({Cx, Cy},{x, y}, 15, 1);
+        line_bresenham({Cx - 15, Cy}, {Cx + 15, Cy}, 9,5);
         delay(10);
-        line_bresenham({Cx, Cy}, {x, y}, 0, 1);
+        line_bresenham({Cx, Cy},{x, y}, 0, 1);
         line_bresenham({Cx - 15, Cy}, {Cx + 15, Cy}, 0, 5);
 
         if (kbhit()) {
